@@ -30,20 +30,33 @@
         <carousel
           :scrollPerPage="true"
           :paginationSize="20"
-          :perPageCustom="[[768, 3], [1024, 4]]"
-          :navigationEnabled="true">
-          <slide v-for="deck in decks" :key="deck.id">
+          :perPageCustom="[[768, 2], [1024, 3]]">
+          <slide
+            v-for="deck in decks"
+            :key="deck.id"
+            class="py-4">
 
-              <v-card class="ma-2" hover="true">
+              <v-card
+                class="mx-2"
+                hover
+                :to="'/decks/' + deck.id">
                 <v-card-media
-                  class="secondary pa-2"
-                  :src="deck.imageUrl"
-                  height="300px" contain>
+                  class="accent darken-2 pa-2"
+                  height="300px">
+
+                  <v-layout row>
+                    <v-flex x12 class="text-xs-center">
+                      <img :src="deck.imageUrl"
+                           style="height:100%;width:auto">
+                    </v-flex>
+                  </v-layout>
+
+
                 </v-card-media>
                 <v-card-title primary-title>
 
                   <div>
-                    <h3 class="headline mb-0">PikaChooChoooo</h3>
+                    <h3 class="headline mb-0">{{ deck.title }}</h3>
                     <div>Some description goes here</div>
                   </div>
 
@@ -66,16 +79,16 @@
       return {
         gradient: 'to top right, rgba(63,81,181, .7), rgba(25,32,72, .7)',
         decks: [
-          { imageUrl: 'https://images.pokemontcg.io/xyp/XY124.png', id: 'werwweww233s', title: 'PikaChooChoo'},
-          { imageUrl: 'https://images.pokemontcg.io/xyp/XY124.png', id: 'werwweww233s', title: 'PikaChooChoo'},
-          { imageUrl: 'https://images.pokemontcg.io/xyp/XY124.png', id: 'werwweww233s', title: 'PikaChooChoo'},
-          { imageUrl: 'https://images.pokemontcg.io/xyp/XY124.png', id: 'werwweww233s', title: 'PikaChooChoo'},
-          { imageUrl: 'https://images.pokemontcg.io/xyp/XY124.png', id: 'werwweww233s', title: 'PikaChooChoo'},
-          { imageUrl: 'https://images.pokemontcg.io/xyp/XY124.png', id: 'werwweww233s', title: 'PikaChooChoo'},
-          { imageUrl: 'https://images.pokemontcg.io/xyp/XY124.png', id: 'werwweww233s', title: 'PikaChooChoo'},
-          { imageUrl: 'https://images.pokemontcg.io/xyp/XY124.png', id: 'werwweww233s', title: 'PikaChooChoo'},
-          { imageUrl: 'https://images.pokemontcg.io/xyp/XY183.png', id: 'dfeewafsdsad', title: 'Mewtwo EX'}
-        ],
+          {imageUrl: 'https://images.pokemontcg.io/xyp/XY124.png', id: 'werwweww233s1', title: 'PikaChooChoo1'},
+          {imageUrl: 'https://images.pokemontcg.io/xyp/XY124.png', id: 'werwweww233s2', title: 'PikaChooChoo2'},
+          {imageUrl: 'https://images.pokemontcg.io/xyp/XY124.png', id: 'werwweww233s3', title: 'PikaChooChoo3'},
+          {imageUrl: 'https://images.pokemontcg.io/xyp/XY124.png', id: 'werwweww233s4', title: 'PikaChooChoo4'},
+          {imageUrl: 'https://images.pokemontcg.io/xyp/XY124.png', id: 'werwweww233s5', title: 'PikaChooChoo5'},
+          {imageUrl: 'https://images.pokemontcg.io/xyp/XY124.png', id: 'werwweww233s6', title: 'PikaChooChoo6'},
+          {imageUrl: 'https://images.pokemontcg.io/xyp/XY124.png', id: 'werwweww233s7', title: 'PikaChooChoo7'},
+          {imageUrl: 'https://images.pokemontcg.io/xyp/XY124.png', id: 'werwweww233s8', title: 'PikaChooChoo8'},
+          {imageUrl: 'https://images.pokemontcg.io/xyp/XY183.png', id: 'dfeewafsdsad9', title: 'Mewtwo EX'}
+        ]
       }
     }
   }

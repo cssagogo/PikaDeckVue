@@ -2,6 +2,7 @@ import Vue from 'vue'
 import Router from 'vue-router'
 import Home from '@/components/Home'
 import Decks from '@/components/Deck/Decks'
+import Deck from '@/components/Deck/Deck'
 import BuildDeck from '@/components/Deck/BuildDeck'
 import Profile from '@/components/User/Profile'
 import Signin from '@/components/User/Signin'
@@ -20,6 +21,11 @@ export default new Router({
       path: '/decks',
       name: 'Decks',
       component: Decks
+    },
+    {
+      path: '/decks/:id',
+      name: 'Deck',
+      component: Deck
     },
     {
       path: '/deck/new',
