@@ -1,36 +1,46 @@
 <template>
-  <v-container fluid>
+  <v-container grid-list-md fluid>
     <v-layout row wrap>
-      <v-flex xs12>
-        <v-card class="info">
-          <v-container fluid>
+      <v-flex xs12 sm6 md4 lg3
+              v-for="deck in decks"
+              :key="deck.id">
+
+        <v-card
+          hover
+          :to="'/decks/' + deck.id">
+          <v-card-media
+            class="secondary darken-4 pa-1">
+
             <v-layout row>
-              <v-flex xs5 sm4 md3>
-                <v-card-media
-                  src="https://images.pokemontcg.io/xyp/XY124.png"
-                  height="130px"
-                ></v-card-media>
-              </v-flex>
-              <v-flex xs7 sm8 md9>
-                <v-card-title primary-title>
-                  <div>
-                    <h3 class="white--text mb-0">Deck Title Here</h3>
-                    <div>Deck description goes here</div>
-                  </div>
-                </v-card-title>
-                <v-card-actions>
-                  <v-btn
-                    flat
-                    to="/decks/1">
-                    <v-icon left light>arrow_forward</v-icon>
-                    View Deck
-                  </v-btn>
-                </v-card-actions>
+              <v-flex x12 class="text-xs-center">
+                <img :src="deck.imageUrl"
+                     style="height:auto;width:100%;display: block">
               </v-flex>
             </v-layout>
-          </v-container>
+
+          </v-card-media>
+          <v-card-title primary-title>
+
+            <div>
+              <h3 class="headline mb-0">{{ deck.title }}</h3>
+              <div>Some description goes here</div>
+            </div>
+
+          </v-card-title>
+
         </v-card>
+
       </v-flex>
     </v-layout>
   </v-container>
 </template>
+
+<script>
+  export default {
+    computed: {
+      decks () {
+        return this.$store.getters.loadedDecks
+      }
+    }
+  }
+</script>

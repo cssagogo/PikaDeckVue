@@ -23,46 +23,40 @@
     <v-layout row wrap>
       <v-flex xs12>
 
-
-
-
-
         <carousel
           :scrollPerPage="true"
           :paginationSize="20"
-          :perPageCustom="[[768, 2], [1024, 3]]">
+          :perPageCustom="[[768, 3], [1024, 4], [1200, 5]]">
           <slide
             v-for="deck in decks"
             :key="deck.id"
-            class="py-4">
+            class="pa-2">
 
-              <v-card
-                class="mx-2"
-                hover
-                :to="'/decks/' + deck.id">
-                <v-card-media
-                  class="accent darken-2 pa-2"
-                  height="300px">
+            <v-card
+              hover
+              :to="'/decks/' + deck.id">
+              <v-card-media
+                class="secondary darken-4 pt-1 text-xs-center">
 
-                  <v-layout row>
-                    <v-flex x12 class="text-xs-center">
-                      <img :src="deck.imageUrl"
-                           style="height:100%;width:auto">
-                    </v-flex>
-                  </v-layout>
+                <v-layout row>
+                  <v-flex x12 class="text-xs-center">
+                    <img :src="deck.imageUrl"
+                         style="max-height:200px;height:100%;width:auto;">
+                  </v-flex>
+                </v-layout>
 
 
-                </v-card-media>
-                <v-card-title primary-title>
+              </v-card-media>
+              <v-card-title primary-title>
 
-                  <div>
-                    <h3 class="headline mb-0">{{ deck.title }}</h3>
-                    <div>Some description goes here</div>
-                  </div>
+                <div>
+                  <h3 class="headline mb-0">{{ deck.title }}</h3>
+                  <div>Some description goes here</div>
+                </div>
 
-                </v-card-title>
+              </v-card-title>
 
-              </v-card>
+            </v-card>
 
           </slide>
         </carousel>
@@ -70,25 +64,61 @@
 
       </v-flex>
     </v-layout>
+
+
+
+
+
+    <v-layout row wrap>
+      <v-flex xs12>
+
+        <carousel
+          :scrollPerPage="true"
+          :paginationSize="20"
+          :perPageCustom="[[768, 3], [1024, 4], [1200, 4]]">
+
+          <slide
+            v-for="set in sets"
+            :key="set.code"
+            class="pa-2">
+
+            <v-card
+              hover
+              :to="'/decks/' + set.code">
+              <v-card-title primary-title class="text-xs-center">
+
+                <v-layout row>
+                  <v-flex x12 class="text-xs-center">
+                    <img :src="set.logoUrl"
+                         style="max-height:60px;max-width:100%;">
+                    <div>{{ set.name }}</div>
+                  </v-flex>
+                </v-layout>
+
+              </v-card-title>
+
+            </v-card>
+
+          </slide>
+        </carousel>
+
+
+      </v-flex>
+    </v-layout>
+
+
+
   </v-container>
 </template>
 
 <script>
   export default {
-    data () {
-      return {
-        gradient: 'to top right, rgba(63,81,181, .7), rgba(25,32,72, .7)',
-        decks: [
-          {imageUrl: 'https://images.pokemontcg.io/xyp/XY124.png', id: 'werwweww233s1', title: 'PikaChooChoo1'},
-          {imageUrl: 'https://images.pokemontcg.io/xyp/XY124.png', id: 'werwweww233s2', title: 'PikaChooChoo2'},
-          {imageUrl: 'https://images.pokemontcg.io/xyp/XY124.png', id: 'werwweww233s3', title: 'PikaChooChoo3'},
-          {imageUrl: 'https://images.pokemontcg.io/xyp/XY124.png', id: 'werwweww233s4', title: 'PikaChooChoo4'},
-          {imageUrl: 'https://images.pokemontcg.io/xyp/XY124.png', id: 'werwweww233s5', title: 'PikaChooChoo5'},
-          {imageUrl: 'https://images.pokemontcg.io/xyp/XY124.png', id: 'werwweww233s6', title: 'PikaChooChoo6'},
-          {imageUrl: 'https://images.pokemontcg.io/xyp/XY124.png', id: 'werwweww233s7', title: 'PikaChooChoo7'},
-          {imageUrl: 'https://images.pokemontcg.io/xyp/XY124.png', id: 'werwweww233s8', title: 'PikaChooChoo8'},
-          {imageUrl: 'https://images.pokemontcg.io/xyp/XY183.png', id: 'dfeewafsdsad9', title: 'Mewtwo EX'}
-        ]
+    computed: {
+      decks () {
+        return this.$store.getters.featuredDecks
+      },
+      sets () {
+        return this.$store.getters.featuredSets
       }
     }
   }
