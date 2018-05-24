@@ -2,8 +2,8 @@
   <v-container grid-list-md fluid>
 
 
-    <v-toolbar>
-      <v-toolbar-title>{{ deck.title }}</v-toolbar-title>
+    <v-toolbar class="transparent elevation-0">
+      <v-toolbar-title class="ml-0">{{ deck.title }}</v-toolbar-title>
       <v-spacer></v-spacer>
       <v-btn icon>
         <v-icon>favorite</v-icon>
@@ -14,7 +14,7 @@
       <v-btn icon>
         <v-icon>share</v-icon>
       </v-btn>
-      <v-menu bottom left>
+      <v-menu bottom left class="mr-0">
         <v-btn slot="activator" icon>
           <v-icon>more_vert</v-icon>
         </v-btn>
