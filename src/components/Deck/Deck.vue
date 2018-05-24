@@ -111,7 +111,7 @@
         { title: 'Print Play Set' },
         { title: 'Add One' },
         { title: 'Remove One' },
-        { title: 'Remove All' },
+        { title: 'Remove All' }
       ]
     })
   }

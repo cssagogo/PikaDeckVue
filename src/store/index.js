@@ -138,8 +138,24 @@ export const store = new Vuex.Store({
       {'code': 'sm5', 'ptcgoCode': 'UPR', 'name': 'Ultra Prism', 'series': 'Sun & Moon', 'totalCards': 156, 'standardLegal': true, 'expandedLegal': true, 'releaseDate': '02/02/2018', 'symbolUrl': 'https://images.pokemontcg.io/sm5/symbol.png', 'logoUrl': 'https://images.pokemontcg.io/sm5/logo.png', 'updatedAt': '03/04/2018 10:35:00'}
     ]
   },
-  mutations: {},
-  actions: {},
+  mutations: {
+    createDeck (state, payload) {
+      state.loadedDecks.push(payload)
+    }
+  },
+  actions: {
+    createDeck ({commit}, payload) {
+      const deck = {
+        title: payload.title,
+        imageUrl: payload.imageUrl,
+        description: payload.description,
+        date: payload.date,
+        id: 'adfasdfasd'
+      }
+      // Reach out to firebase and store it.
+      commit('createDeck', deck)
+    }
+  },
   getters: {
     loadedCards (state) {
       return state.loadedCards.sort((cardA, cardB) => {
