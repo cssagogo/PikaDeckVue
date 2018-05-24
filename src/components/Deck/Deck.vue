@@ -1,11 +1,31 @@
 <template>
   <v-container grid-list-md fluid>
 
-    <v-layout row wrap>
-      <v-flex xs12>
-        <h1>{{ deck.title }}</h1>
-      </v-flex>
-    </v-layout>
+
+    <v-toolbar>
+      <v-toolbar-title>{{ deck.title }}</v-toolbar-title>
+      <v-spacer></v-spacer>
+      <v-btn icon>
+        <v-icon>favorite</v-icon>
+      </v-btn>
+      <v-btn icon>
+        <v-icon>bookmark</v-icon>
+      </v-btn>
+      <v-btn icon>
+        <v-icon>share</v-icon>
+      </v-btn>
+      <v-menu bottom left>
+        <v-btn slot="activator" icon>
+          <v-icon>more_vert</v-icon>
+        </v-btn>
+        <v-list>
+          <v-list-tile v-for="(item, i) in items" :key="i" @click="">
+            <v-list-tile-title>{{ item.title }}</v-list-tile-title>
+          </v-list-tile>
+        </v-list>
+      </v-menu>
+    </v-toolbar>
+
 
     <v-layout row wrap>
       <v-flex xs12 sm12 md8 lg9>
@@ -25,12 +45,24 @@
                   </v-flex>
                 </v-layout>
               </v-card-media>
-              <v-card-title primary-title>
-                <div>
-                  <h3 class="headline mb-0">{{ card.title }}</h3>
-                  <div>Some description goes here</div>
-                </div>
-              </v-card-title>
+
+              <v-card-actions>
+                <span class="headline ml-3 d-inline-block">x2</span>
+                <v-spacer></v-spacer>
+                <v-menu bottom left>
+                  <v-btn slot="activator" icon>
+                    <v-icon>more_vert</v-icon>
+                  </v-btn>
+                  <v-list>
+                    <v-list-tile v-for="(item, i) in items" :key="i" @click="">
+                      <v-list-tile-title>
+                        <v-icon left>favorite</v-icon> {{ item.title }}
+                      </v-list-tile-title>
+                    </v-list-tile>
+                  </v-list>
+                </v-menu>
+              </v-card-actions>
+
             </v-card>
 
           </v-flex>
@@ -76,6 +108,15 @@
       cards () {
         return this.$store.getters.loadedCards
       }
-    }
+    },
+    data: () => ({
+      items: [
+        { title: 'Card Info' },
+        { title: 'Print Play Set' },
+        { title: 'Add One' },
+        { title: 'Remove One' },
+        { title: 'Remove All' },
+      ]
+    })
   }
 </script>
