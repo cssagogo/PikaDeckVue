@@ -79,9 +79,7 @@
           <v-card-text>
             <div class="info--text">{{ deck.date }} - Creator</div>
             <div>
-              Lorem ipsum dolor sit amet, consectetur adipisicing elit. Animi blanditiis commodi corporis
-              debitis dicta est illum, iusto labore laboriosam, laudantium magni minima natus nostrum omnis
-              perspiciatis, qui quibusdam ullam voluptatem!
+              {{ deck.description }}
             </div>
           </v-card-text>
         </v-card>

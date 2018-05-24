@@ -84,6 +84,9 @@
     },
     methods: {
       onCreateDeck () {
+        if (!this.formIsValid) {
+          return
+        }
         const deckData = {
           title: this.title,
           imageUrl: this.imageUrl,
@@ -91,6 +94,7 @@
           date: new Date()
         }
         this.$store.dispatch('createDeck', deckData)
+        this.$router.push('/decks')
       }
     }
   }

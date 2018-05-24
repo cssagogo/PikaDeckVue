@@ -1,5 +1,5 @@
 <template>
-  <v-container grid-list-md fluid>
+  <v-container grid-list-xl fluid>
     <v-layout row wrap>
       <v-flex xs12 sm6 md4 lg3
               v-for="deck in decks"
@@ -19,14 +19,20 @@
             </v-layout>
 
           </v-card-media>
-          <v-card-title primary-title>
 
+          <v-card-actions>
             <div>
-              <h3 class="headline mb-0">{{ deck.title }}</h3>
-              <div>Some description goes here</div>
+              <h3 class="mb-0">{{ deck.title }}</h3>
+              <div>By John Smith</div>
             </div>
-
-          </v-card-title>
+            <v-spacer></v-spacer>
+            <v-btn icon>
+              <v-icon>favorite</v-icon>
+            </v-btn>
+            <v-btn icon>
+              <v-icon>share</v-icon>
+            </v-btn>
+          </v-card-actions>
 
         </v-card>
 

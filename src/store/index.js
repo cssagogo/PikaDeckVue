@@ -10,30 +10,35 @@ export const store = new Vuex.Store({
         imageUrl: 'https://images.pokemontcg.io/xyp/XY124.png',
         id: 'werwweww233s1',
         title: 'PikaChooChoo1',
+        description: 'Adding something funny and witty here would be nice.',
         date: '2017-07-12'
       },
       {
         imageUrl: 'https://images.pokemontcg.io/xyp/XY123.png',
         id: 'werwweww233s2',
         title: 'PikaChooChoo2',
+        description: 'Adding something funny and witty here would be nice.',
         date: '2017-07-14'
       },
       {
         imageUrl: 'https://images.pokemontcg.io/xyp/XY122.png',
         id: 'werwweww233s3',
         title: 'PikaChooChoo3',
+        description: 'Adding something funny and witty here would be nice.',
         date: '2017-07-13'
       },
       {
         imageUrl: 'https://images.pokemontcg.io/xyp/XY121.png',
         id: 'werwweww233s4',
         title: 'PikaChooChoo4',
+        description: 'Adding something funny and witty here would be nice.',
         date: '2017-07-15'
       },
       {
         imageUrl: 'https://images.pokemontcg.io/xyp/XY120.png',
         id: 'werwweww233s5',
         title: 'PikaChooChoo5',
+        description: 'Adding something funny and witty here would be nice.',
         date: '2017-07-15'
       },
       {
@@ -46,18 +51,21 @@ export const store = new Vuex.Store({
         imageUrl: 'https://images.pokemontcg.io/xyp/XY118.png',
         id: 'werwweww233s7',
         title: 'PikaChooChoo7',
+        description: 'Adding something funny and witty here would be nice.',
         date: '2017-07-15'
       },
       {
         imageUrl: 'https://images.pokemontcg.io/xyp/XY117.png',
         id: 'werwweww233s8',
         title: 'PikaChooChoo8',
+        description: 'Adding something funny and witty here would be nice.',
         date: '2017-07-16'
       },
       {
         imageUrl: 'https://images.pokemontcg.io/xyp/XY183.png',
         id: 'dfeewafsdsad9',
         title: 'Mewtwo EX',
+        description: 'Adding something funny and witty here would be nice.',
         date: '2017-07-18'
       }
     ],

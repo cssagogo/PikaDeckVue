@@ -41,20 +41,26 @@
                 <v-layout row>
                   <v-flex x12 class="text-xs-center">
                     <img :src="deck.imageUrl"
-                         style="max-height:200px;height:100%;width:auto;">
+                         style="max-height:300px;height:100%;width:auto;">
                   </v-flex>
                 </v-layout>
 
 
               </v-card-media>
-              <v-card-title primary-title>
 
+              <v-card-actions>
                 <div>
-                  <h3 class="headline mb-0">{{ deck.title }}</h3>
-                  <div>Some description goes here</div>
+                  <h3 class="mb-0">{{ deck.title }}</h3>
+                  <div>By John Smith</div>
                 </div>
-
-              </v-card-title>
+                <v-spacer></v-spacer>
+                <v-btn icon>
+                  <v-icon>favorite</v-icon>
+                </v-btn>
+                <v-btn icon>
+                  <v-icon>share</v-icon>
+                </v-btn>
+              </v-card-actions>
 
             </v-card>
 
