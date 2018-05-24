@@ -61,6 +61,62 @@ export const store = new Vuex.Store({
         date: '2017-07-18'
       }
     ],
+    loadedCards: [
+      {
+        imageUrl: 'https://images.pokemontcg.io/xyp/XY124.png',
+        id: 'werwweww233s1',
+        title: 'PikaChooChoo1',
+        date: '2017-07-12'
+      },
+      {
+        imageUrl: 'https://images.pokemontcg.io/xyp/XY123.png',
+        id: 'werwweww233s2',
+        title: 'PikaChooChoo2',
+        date: '2017-07-14'
+      },
+      {
+        imageUrl: 'https://images.pokemontcg.io/xyp/XY122.png',
+        id: 'werwweww233s3',
+        title: 'PikaChooChoo3',
+        date: '2017-07-13'
+      },
+      {
+        imageUrl: 'https://images.pokemontcg.io/xyp/XY121.png',
+        id: 'werwweww233s4',
+        title: 'PikaChooChoo4',
+        date: '2017-07-15'
+      },
+      {
+        imageUrl: 'https://images.pokemontcg.io/xyp/XY120.png',
+        id: 'werwweww233s5',
+        title: 'PikaChooChoo5',
+        date: '2017-07-15'
+      },
+      {
+        imageUrl: 'https://images.pokemontcg.io/xyp/XY119.png',
+        id: 'werwweww233s6',
+        title: 'PikaChooChoo6',
+        date: '2017-07-14'
+      },
+      {
+        imageUrl: 'https://images.pokemontcg.io/xyp/XY118.png',
+        id: 'werwweww233s7',
+        title: 'PikaChooChoo7',
+        date: '2017-07-15'
+      },
+      {
+        imageUrl: 'https://images.pokemontcg.io/xyp/XY117.png',
+        id: 'werwweww233s8',
+        title: 'PikaChooChoo8',
+        date: '2017-07-16'
+      },
+      {
+        imageUrl: 'https://images.pokemontcg.io/xyp/XY183.png',
+        id: 'dfeewafsdsad9',
+        title: 'Mewtwo EX',
+        date: '2017-07-18'
+      }
+    ],
     user: {
       id: 'adsfadfasd',
       favoriteDecks: ['dfeewafsdsad9']
@@ -85,6 +141,11 @@ export const store = new Vuex.Store({
   mutations: {},
   actions: {},
   getters: {
+    loadedCards (state) {
+      return state.loadedCards.sort((cardA, cardB) => {
+        return cardA.date > cardB.date
+      })
+    },
     loadedDecks (state) {
       return state.loadedDecks.sort((deckA, deckB) => {
         return deckA.date > deckB.date

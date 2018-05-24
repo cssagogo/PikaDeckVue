@@ -25,6 +25,7 @@ export default new Router({
     {
       path: '/decks/:id',
       name: 'Deck',
+      props: true,
       component: Deck
     },
     {
@@ -48,5 +49,12 @@ export default new Router({
       component: Signin
     }
   ],
+  scrollBehavior (to, from, savedPosition) {
+    if (savedPosition) {
+      return savedPosition
+    } else {
+      return { x: 0, y: 0 }
+    }
+  },
   mode: 'history'
 })
