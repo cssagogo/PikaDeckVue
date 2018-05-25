@@ -77,7 +77,7 @@
             height="300px"
           ></v-card-media>
           <v-card-text>
-            <div class="info--text">{{ deck.date }} - Creator</div>
+            <div class="info--text">{{ deck.date | date }} - Creator</div>
             <div>
               {{ deck.description }}
             </div>

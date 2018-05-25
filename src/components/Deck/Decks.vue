@@ -23,7 +23,7 @@
           <v-card-actions>
             <div>
               <h3 class="mb-0">{{ deck.title }}</h3>
-              <div>By John Smith</div>
+              <div>By John Smith | {{ deck.date | date }}</div>
             </div>
             <v-spacer></v-spacer>
             <v-btn icon>
