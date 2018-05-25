@@ -1,7 +1,7 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
 
-import SetsService from '@/services/pctg/SetsService'
+import TcgoService from '@/services/pctg/Service'
 
 Vue.use(Vuex)
 
@@ -131,7 +131,10 @@ export const store = new Vuex.Store({
       id: 'adsfadfasd',
       favoriteDecks: ['dfeewafsdsad9']
     },
-    loadedSets: []
+    loadedSets: [],
+    loadedTypes: [],
+    loadedSubtypes: [],
+    loadedSupertypes: []
   },
   mutations: {
     createDeck (state, payload) {
@@ -140,6 +143,21 @@ export const store = new Vuex.Store({
     createSets (state, payload) {
       for (const set of payload) {
         state.loadedSets.push(set)
+      }
+    },
+    createSubtypes (state, payload) {
+      for (const subtypes of payload) {
+        state.loadedSubtypes.push(subtypes)
+      }
+    },
+    createSupertypes (state, payload) {
+      for (const supertypes of payload) {
+        state.loadedSupertypes.push(supertypes)
+      }
+    },
+    createTypes (state, payload) {
+      for (const types of payload) {
+        state.loadedTypes.push(types)
       }
     }
   },
@@ -155,9 +173,24 @@ export const store = new Vuex.Store({
       // Reach out to firebase and store it.
       commit('createDeck', deck)
     },
-    async createSets ({commit}, payload) {
-      await SetsService.getSets().then(function (response) {
+    createSets ({commit}, payload) {
+      TcgoService.getSets().then(function (response) {
         commit('createSets', response.data.sets)
+      })
+    },
+    createSubtypes ({commit}, payload) {
+      TcgoService.getSubtypes().then(function (response) {
+        commit('createSubtypes', response.data.subtypes)
+      })
+    },
+    createSupertypes ({commit}, payload) {
+      TcgoService.getSupertypes().then(function (response) {
+        commit('createSupertypes', response.data.supertypes)
+      })
+    },
+    createTypes ({commit}, payload) {
+      TcgoService.getTypes().then(function (response) {
+        commit('createTypes', response.data.types)
       })
     }
   },

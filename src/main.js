@@ -32,7 +32,10 @@ new Vue({
   router,
   store,
   render: h => h(App),
-  mounted () {
+  created () {
     this.$store.dispatch('createSets')
+    this.$store.dispatch('createSubtypes')
+    this.$store.dispatch('createSupertypes')
+    this.$store.dispatch('createTypes')
   }
 })
