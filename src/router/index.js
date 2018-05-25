@@ -4,6 +4,8 @@ import Home from '@/components/Home'
 import Decks from '@/components/Deck/Decks'
 import Deck from '@/components/Deck/Deck'
 import BuildDeck from '@/components/Deck/BuildDeck'
+import Sets from '@/components/Set/Sets'
+import Set from '@/components/Set/Set'
 import Profile from '@/components/User/Profile'
 import Signin from '@/components/User/Signin'
 import Signup from '@/components/User/Signup'
@@ -32,6 +34,17 @@ export default new Router({
       path: '/deck/new',
       name: 'BuildDeck',
       component: BuildDeck
+    },
+    {
+      path: '/sets',
+      name: 'Sets',
+      component: Sets
+    },
+    {
+      path: '/sets/:code',
+      name: 'Set',
+      props: true,
+      component: Set
     },
     {
       path: '/profile',

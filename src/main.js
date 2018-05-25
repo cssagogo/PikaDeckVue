@@ -7,6 +7,7 @@ import colors from 'vuetify/es5/util/colors'
 import VueCarousel from 'vue-carousel'
 import { store } from './store'
 import DateFilter from './filters/date'
+import DateTimeFilter from './filters/dateTime'
 
 Vue.use(Vuetify, {
   theme: {
@@ -25,6 +26,7 @@ Vue.use(VueCarousel)
 Vue.config.productionTip = false
 
 Vue.filter('date', DateFilter)
+Vue.filter('dateTime', DateTimeFilter)
 
 /* eslint-disable no-new */
 new Vue({

@@ -90,7 +90,7 @@
 
             <v-card
               hover
-              :to="'/decks/' + set.code">
+              :to="'/sets/' + set.code">
               <v-card-title primary-title class="text-xs-center">
 
                 <v-layout row>
@@ -98,6 +98,7 @@
                     <img :src="set.logoUrl"
                          style="max-height:60px;max-width:100%;">
                     <div>{{ set.name }}</div>
+                    <div>{{ set.releaseDate | date }}</div>
                   </v-flex>
                 </v-layout>
 

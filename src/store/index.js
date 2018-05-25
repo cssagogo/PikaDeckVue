@@ -131,7 +131,19 @@ export const store = new Vuex.Store({
       id: 'adsfadfasd',
       favoriteDecks: ['dfeewafsdsad9']
     },
-    loadedSets: [],
+    loadedSets: [{
+      code: 'sm6',
+      expandedLegal: true,
+      logoUrl: 'https://images.pokemontcg.io/sm6/logo.png',
+      name: 'Forbidden Light',
+      ptcgoCode: 'FLI',
+      releaseDate: '05/04/2018',
+      series: 'Sun & Moon',
+      standardLegal: false,
+      symbolUrl: 'https://images.pokemontcg.io/sm6/symbol.png',
+      totalCards: 131,
+      updatedAt: '05/04/2018 20:10:00'
+    }],
     loadedTypes: [],
     loadedSubtypes: [],
     loadedSupertypes: []
@@ -217,16 +229,16 @@ export const store = new Vuex.Store({
     },
     loadedSets (state) {
       return state.loadedSets.sort((setA, setB) => {
-        return setA.releaseDate > setB.releaseDate
+        return new Date(setB.releaseDate) - new Date(setA.releaseDate)
       })
     },
     featuredSets (state, getters) {
       return getters.loadedSets.slice(0, 10)
     },
     loadedSet (state) {
-      return (code) => {
-        return state.loadedDecks.find((set) => {
-          return set.code === code
+      return (setCode) => {
+        return state.loadedSets.find((set) => {
+          return set.code === setCode
         })
       }
     }
