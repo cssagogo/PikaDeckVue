@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
+import * as firebase from 'firebase'
 
 import TcgoService from '@/services/pctg/Service'
 
@@ -127,10 +128,6 @@ export const store = new Vuex.Store({
         date: '2017-07-18'
       }
     ],
-    user: {
-      id: 'adsfadfasd',
-      favoriteDecks: ['dfeewafsdsad9']
-    },
     loadedSets: [{
       code: 'sm6',
       expandedLegal: true,
@@ -146,13 +143,15 @@ export const store = new Vuex.Store({
     }],
     loadedTypes: [],
     loadedSubtypes: [],
-    loadedSupertypes: []
+    loadedSupertypes: [],
+    user: null
   },
   mutations: {
     createDeck (state, payload) {
       state.loadedDecks.push(payload)
     },
     createSets (state, payload) {
+      state.loadedSets = []
       for (const set of payload) {
         state.loadedSets.push(set)
       }
@@ -171,9 +170,48 @@ export const store = new Vuex.Store({
       for (const types of payload) {
         state.loadedTypes.push(types)
       }
+    },
+    setUser (state, payload) {
+      state.user = payload
     }
   },
   actions: {
+    signUpUser ({commit}, payload) {
+      firebase.auth().createUserWithEmailAndPassword(payload.email, payload.password)
+        .then(
+          user => {
+            // TODO: Need to better understand why firebase object format is different than video example.
+            user = firebase.auth().currentUser
+            const newUser = {
+              id: user.uid,
+              favoriteDecks: []
+            }
+            commit('setUser', newUser)
+          }
+        )
+        .catch(
+          error => {
+            console.log(error)
+          }
+        )
+    },
+    signInUser ({commit}, payload) {
+      firebase.auth().signInWithEmailAndPassword(payload.email, payload.password)
+        .then(
+          user => {
+            const newUser = {
+              id: user.uid,
+              favoriteDecks: []
+            }
+            commit('setUser', newUser)
+          }
+        )
+        .catch(
+          error => {
+            console.log(error)
+          }
+        )
+    },
     createDeck ({commit}, payload) {
       const deck = {
         title: payload.title,
@@ -241,6 +279,9 @@ export const store = new Vuex.Store({
           return set.code === setCode
         })
       }
+    },
+    user (state) {
+      return state.user
     }
   }
 })
