@@ -1,10 +1,11 @@
 import Vue from 'vue'
-import App from './App'
-import router from './router'
+import VueCarousel from 'vue-carousel'
 import Vuetify from 'vuetify'
+import App from './App'
+import * as firebase from 'firebase'
 import 'vuetify/dist/vuetify.min.css'
 import colors from 'vuetify/es5/util/colors'
-import VueCarousel from 'vue-carousel'
+import router from './router'
 import { store } from './store'
 import DateFilter from './filters/date'
 import DateTimeFilter from './filters/dateTime'
@@ -39,5 +40,12 @@ new Vue({
     this.$store.dispatch('createSubtypes')
     this.$store.dispatch('createSupertypes')
     this.$store.dispatch('createTypes')
+    firebase.initializeApp({
+      apiKey: 'AIzaSyDXKwo2ZC1IF3HjnG6sRT3y4zwzCOK6k38',
+      authDomain: 'pikadeckvue.firebaseapp.com',
+      databaseURL: 'https://pikadeckvue.firebaseio.com',
+      projectId: 'pikadeckvue',
+      storageBucket: 'pikadeckvue.appspot.com'
+    })
   }
 })
