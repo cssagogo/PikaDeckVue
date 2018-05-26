@@ -4,11 +4,13 @@ import Vuetify from 'vuetify'
 import App from './App'
 import * as firebase from 'firebase'
 import 'vuetify/dist/vuetify.min.css'
+import './scss/main.scss'
 import colors from 'vuetify/es5/util/colors'
 import router from './router'
 import { store } from './store'
 import DateFilter from './filters/date'
 import DateTimeFilter from './filters/dateTime'
+import AlertComponent from './components/Shared/Alert.vue'
 
 Vue.use(Vuetify, {
   theme: {
@@ -28,6 +30,7 @@ Vue.config.productionTip = false
 
 Vue.filter('date', DateFilter)
 Vue.filter('dateTime', DateTimeFilter)
+Vue.component('app-alert', AlertComponent)
 
 /* eslint-disable no-new */
 new Vue({

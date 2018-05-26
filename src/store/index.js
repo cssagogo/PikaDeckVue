@@ -144,7 +144,9 @@ export const store = new Vuex.Store({
     loadedTypes: [],
     loadedSubtypes: [],
     loadedSupertypes: [],
-    user: null
+    user: null,
+    loading: false,
+    error: null
   },
   mutations: {
     createDeck (state, payload) {
@@ -173,13 +175,25 @@ export const store = new Vuex.Store({
     },
     setUser (state, payload) {
       state.user = payload
+    },
+    setLoading (state, payload) {
+      state.loading = payload
+    },
+    setError (state, payload) {
+      state.error = payload
+    },
+    clearError (state) {
+      state.error = null
     }
   },
   actions: {
     signUpUser ({commit}, payload) {
+      commit('setLoading', true)
+      commit('clearError')
       firebase.auth().createUserWithEmailAndPassword(payload.email, payload.password)
         .then(
           user => {
+            commit('setLoading', false)
             // TODO: Need to better understand why firebase object format is different than video example.
             user = firebase.auth().currentUser
             const newUser = {
@@ -191,14 +205,19 @@ export const store = new Vuex.Store({
         )
         .catch(
           error => {
+            commit('setLoading', false)
+            commit('setError', error)
             console.log(error)
           }
         )
     },
     signInUser ({commit}, payload) {
+      commit('setLoading', true)
+      commit('clearError')
       firebase.auth().signInWithEmailAndPassword(payload.email, payload.password)
         .then(
           user => {
+            commit('setLoading', false)
             const newUser = {
               id: user.uid,
               favoriteDecks: []
@@ -208,6 +227,8 @@ export const store = new Vuex.Store({
         )
         .catch(
           error => {
+            commit('setLoading', false)
+            commit('setError', error)
             console.log(error)
           }
         )
@@ -242,6 +263,9 @@ export const store = new Vuex.Store({
       TcgoService.getTypes().then(function (response) {
         commit('createTypes', response.data.types)
       })
+    },
+    clearError ({commit}) {
+      commit('clearError')
     }
   },
   getters: {
@@ -282,6 +306,12 @@ export const store = new Vuex.Store({
     },
     user (state) {
       return state.user
+    },
+    error (state) {
+      return state.error
+    },
+    loading (state) {
+      return state.loading
     }
   }
 })
