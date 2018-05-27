@@ -39,10 +39,6 @@ new Vue({
   store,
   render: h => h(App),
   created () {
-    this.$store.dispatch('createSets')
-    this.$store.dispatch('createSubtypes')
-    this.$store.dispatch('createSupertypes')
-    this.$store.dispatch('createTypes')
     firebase.initializeApp({
       apiKey: 'AIzaSyDXKwo2ZC1IF3HjnG6sRT3y4zwzCOK6k38',
       authDomain: 'pikadeckvue.firebaseapp.com',
@@ -50,5 +46,15 @@ new Vue({
       projectId: 'pikadeckvue',
       storageBucket: 'pikadeckvue.appspot.com'
     })
+    firebase.auth().onAuthStateChanged((user) => {
+      if (user) {
+        this.$store.dispatch('autoSignIn', user)
+      }
+    })
+    this.$store.dispatch('loadSets')
+    this.$store.dispatch('loadSubtypes')
+    this.$store.dispatch('loadSupertypes')
+    this.$store.dispatch('loadTypes')
+    this.$store.dispatch('loadDecks')
   }
 })

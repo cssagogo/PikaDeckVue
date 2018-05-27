@@ -3,7 +3,9 @@
 
 
     <v-toolbar class="transparent elevation-0">
-      <v-toolbar-title class="ml-0">{{ set.name }}</v-toolbar-title>
+      <v-toolbar-title class="ml-0">
+        {{ set.name }}
+      </v-toolbar-title>
       <v-spacer></v-spacer>
       <v-btn icon>
         <v-icon>favorite</v-icon>
@@ -72,9 +74,14 @@
 
         <v-card>
           <v-card-media
-            :src="set.logoUrl"
-            height="300px"
-          ></v-card-media>
+            class="pa-1">
+            <v-layout row>
+              <v-flex x12 class="text-xs-center">
+                <img :src="set.logoUrl"
+                     style="height:auto;width:100%;display: block">
+              </v-flex>
+            </v-layout>
+          </v-card-media>
           <v-card-text>
             <div>{{ set.series }} Series</div>
             <h3 class="mb-0">{{ set.name }}</h3>

@@ -149,6 +149,9 @@ export const store = new Vuex.Store({
     error: null
   },
   mutations: {
+    setLoadedDecks (state, payload) {
+      state.loadedDecks = payload
+    },
     createDeck (state, payload) {
       state.loadedDecks.push(payload)
     },
@@ -187,6 +190,75 @@ export const store = new Vuex.Store({
     }
   },
   actions: {
+    createDeck ({commit, getters}, payload) {
+      const deck = {
+        title: payload.title,
+        imageUrl: payload.imageUrl,
+        description: payload.description,
+        date: payload.date.toISOString(),
+        creatorId: getters.user.id
+      }
+      firebase.database().ref('decks').push(deck)
+        .then((data) => {
+          const key = data.key
+          commit('createDeck', {
+            ...deck,
+            id: key
+          })
+        })
+        .catch((error) => {
+          console.log(error)
+        })
+    },
+    loadDecks ({commit}) {
+      commit('setLoading', true)
+      firebase.database().ref('decks').once('value')
+        .then((data) => {
+          const decks = []
+          const obj = data.val()
+          for (let key in obj) {
+            decks.push({
+              id: key,
+              title: obj[key].title,
+              description: obj[key].description,
+              imageUrl: obj[key].imageUrl,
+              date: obj[key].date,
+              creatorId: obj[key].creatorId
+            })
+          }
+          commit('setLoadedDecks', decks)
+          commit('setLoading', false)
+        })
+        .catch((error) => {
+          commit('setLoading', false)
+          console.log(error)
+        })
+    },
+
+    loadSets ({commit}, payload) {
+      TcgoService.getSets().then(function (response) {
+        commit('createSets', response.data.sets)
+      })
+    },
+    loadSubtypes ({commit}, payload) {
+      TcgoService.getSubtypes().then(function (response) {
+        commit('createSubtypes', response.data.subtypes)
+      })
+    },
+    loadSupertypes ({commit}, payload) {
+      TcgoService.getSupertypes().then(function (response) {
+        commit('createSupertypes', response.data.supertypes)
+      })
+    },
+    loadTypes ({commit}, payload) {
+      TcgoService.getTypes().then(function (response) {
+        commit('createTypes', response.data.types)
+      })
+    },
+
+    autoSignIn ({commit}, payload) {
+      commit('setUser', {id: payload.uid, favoriteDecks: []})
+    },
     signUpUser ({commit}, payload) {
       commit('setLoading', true)
       commit('clearError')
@@ -233,47 +305,16 @@ export const store = new Vuex.Store({
           }
         )
     },
-    createDeck ({commit}, payload) {
-      const deck = {
-        title: payload.title,
-        imageUrl: payload.imageUrl,
-        description: payload.description,
-        date: payload.date,
-        id: 'adfasdfasd'
-      }
-      // Reach out to firebase and store it.
-      commit('createDeck', deck)
+    logout ({commit}) {
+      firebase.auth().signOut()
+      commit('setUser', null)
     },
-    createSets ({commit}, payload) {
-      TcgoService.getSets().then(function (response) {
-        commit('createSets', response.data.sets)
-      })
-    },
-    createSubtypes ({commit}, payload) {
-      TcgoService.getSubtypes().then(function (response) {
-        commit('createSubtypes', response.data.subtypes)
-      })
-    },
-    createSupertypes ({commit}, payload) {
-      TcgoService.getSupertypes().then(function (response) {
-        commit('createSupertypes', response.data.supertypes)
-      })
-    },
-    createTypes ({commit}, payload) {
-      TcgoService.getTypes().then(function (response) {
-        commit('createTypes', response.data.types)
-      })
-    },
+
     clearError ({commit}) {
       commit('clearError')
     }
   },
   getters: {
-    loadedCards (state) {
-      return state.loadedCards.sort((cardA, cardB) => {
-        return cardA.date > cardB.date
-      })
-    },
     loadedDecks (state) {
       return state.loadedDecks.sort((deckA, deckB) => {
         return deckA.date > deckB.date
@@ -289,6 +330,13 @@ export const store = new Vuex.Store({
         })
       }
     },
+
+    loadedCards (state) {
+      return state.loadedCards.sort((cardA, cardB) => {
+        return cardA.date > cardB.date
+      })
+    },
+
     loadedSets (state) {
       return state.loadedSets.sort((setA, setB) => {
         return new Date(setB.releaseDate) - new Date(setA.releaseDate)
@@ -304,6 +352,7 @@ export const store = new Vuex.Store({
         })
       }
     },
+
     user (state) {
       return state.user
     },
