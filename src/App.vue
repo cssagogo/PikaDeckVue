@@ -78,7 +78,8 @@
         ]
         if (this.userIsAuthenticated) {
           menuItems = [
-            { icon: 'view_module', title: 'View Decks', link: '/decks' },
+            { icon: 'view_module', title: 'Sets', link: '/sets' },
+            { icon: 'view_module', title: 'Decks', link: '/decks' },
             { icon: 'room', title: 'Create Deck', link: '/deck/new' },
             { icon: 'person', title: 'Profile', link: '/profile' }
           ]

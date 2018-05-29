@@ -43,7 +43,7 @@ export default new Router({
       component: Sets
     },
     {
-      path: '/sets/:code',
+      path: '/sets/:code/:seoTitle',
       name: 'Set',
       props: true,
       component: Set

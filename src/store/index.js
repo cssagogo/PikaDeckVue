@@ -235,22 +235,24 @@ export const store = new Vuex.Store({
         })
     },
 
-    loadSets ({commit}, payload) {
+    loadSets ({commit}) {
+      commit('setLoading', true)
       TcgoService.getSets().then(function (response) {
         commit('createSets', response.data.sets)
+        commit('setLoading', false)
       })
     },
-    loadSubtypes ({commit}, payload) {
+    loadSubtypes ({commit}) {
       TcgoService.getSubtypes().then(function (response) {
         commit('createSubtypes', response.data.subtypes)
       })
     },
-    loadSupertypes ({commit}, payload) {
+    loadSupertypes ({commit}) {
       TcgoService.getSupertypes().then(function (response) {
         commit('createSupertypes', response.data.supertypes)
       })
     },
-    loadTypes ({commit}, payload) {
+    loadTypes ({commit}) {
       TcgoService.getTypes().then(function (response) {
         commit('createTypes', response.data.types)
       })

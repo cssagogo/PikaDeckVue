@@ -85,13 +85,16 @@
             class="pa-2">
             <v-card
               hover
-              :to="'/sets/' + set.code">
+              :to="setPath(set)">
               <v-card-title primary-title class="text-xs-center">
                 <v-layout row>
                   <v-flex x12 class="text-xs-center">
                     <img :src="set.logoUrl"
                          style="max-height:60px;max-width:100%;">
-                    <div>{{ set.name }}</div>
+                    <h3 class="mb-0">
+                      <img :src="set.symbolUrl" height="16px">
+                      {{ set.name }}
+                    </h3>
                     <div>{{ set.releaseDate | date }}</div>
                   </v-flex>
                 </v-layout>
@@ -117,10 +120,13 @@
       sets () {
         return this.$store.getters.featuredSets
       }
+    },
+    methods: {
+      setPath (set) {
+        // TODO: Is doing this as a method best pracice?
+        // TODO: This is used on Sets page as well. How do I avoid duplication?
+        return '/sets/' + set.code + '/' + this.$options.filters.seoTitle(set.name)
+      }
     }
   }
 </script>
-
-<style scoped>
-
-</style>

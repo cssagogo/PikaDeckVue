@@ -12,5 +12,8 @@ export default {
   },
   getTypes () {
     return PctgApi().get('/types')
+  },
+  getCards (params) {
+    return PctgApi().get('/cards', params)
   }
 }

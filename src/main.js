@@ -10,6 +10,7 @@ import router from './router'
 import { store } from './store'
 import DateFilter from './filters/date'
 import DateTimeFilter from './filters/dateTime'
+import SeoTitleFilter from './filters/seoTitle'
 import AlertComponent from './components/Shared/Alert.vue'
 
 Vue.use(Vuetify, {
@@ -30,6 +31,7 @@ Vue.config.productionTip = false
 
 Vue.filter('date', DateFilter)
 Vue.filter('dateTime', DateTimeFilter)
+Vue.filter('seoTitle', SeoTitleFilter)
 Vue.component('app-alert', AlertComponent)
 
 /* eslint-disable no-new */
