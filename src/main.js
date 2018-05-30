@@ -12,6 +12,7 @@ import DateFilter from './filters/date'
 import DateTimeFilter from './filters/dateTime'
 import SeoTitleFilter from './filters/seoTitle'
 import AlertComponent from './components/Shared/Alert.vue'
+import BarChart from './components/shared/BarChart.js'
 
 Vue.use(Vuetify, {
   theme: {
@@ -33,6 +34,7 @@ Vue.filter('date', DateFilter)
 Vue.filter('dateTime', DateTimeFilter)
 Vue.filter('seoTitle', SeoTitleFilter)
 Vue.component('app-alert', AlertComponent)
+Vue.component('bar-chart', BarChart)
 
 /* eslint-disable no-new */
 new Vue({

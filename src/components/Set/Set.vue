@@ -42,7 +42,7 @@
         <v-layout row wrap>
           <v-flex xs12 sm12 md8 lg8>
 
-            <v-layout row wrap>
+            <v-layout row wrap v-if="loading">
               <v-flex xs12 sm6 md4 lg3
                       v-for="card in cards"
                       :key="card.id">
@@ -111,6 +111,8 @@
 
                   </v-flex>
                 </v-layout>
+
+                <bar-chart></bar-chart>
 
                 <template>
                   <v-tabs
