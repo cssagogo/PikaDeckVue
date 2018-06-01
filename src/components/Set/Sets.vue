@@ -20,7 +20,7 @@
             class="px-3 py-2">
             <v-layout row>
               <v-flex x12 class="text-xs-center set-logo">
-                <img :src="set.logoUrl"
+                <img v-lazy="set.logoUrl"
                      class="set-logo__image">
               </v-flex>
             </v-layout>
@@ -29,7 +29,7 @@
             <v-layout xs12>
               <v-flex class="text-xs-center">
                 <h3 class="mb-0">
-                  <img :src="set.symbolUrl" height="20px">
+                  <img v-lazy="set.symbolUrl" height="20px">
                   {{ set.name }}
                 </h3>
                 <div>{{ set.series }} Series | {{ set.releaseDate | date }}</div>

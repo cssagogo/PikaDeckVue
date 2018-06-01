@@ -7,6 +7,7 @@ import BuildDeck from '@/components/Deck/BuildDeck'
 import Sets from '@/components/Set/Sets'
 import Set from '@/components/Set/Set'
 import Profile from '@/components/User/Profile'
+import Dashboard from '@/components/User/Dashboard'
 import Signin from '@/components/User/Signin'
 import Signup from '@/components/User/Signup'
 import AuthGuard from './auth-guard'
@@ -51,7 +52,12 @@ export default new Router({
     {
       path: '/profile',
       name: 'Profile',
-      component: Profile,
+      component: Profile
+    },
+    {
+      path: '/dashboard',
+      name: 'Dashboard',
+      component: Dashboard,
       beforeEnter: AuthGuard
     },
     {
