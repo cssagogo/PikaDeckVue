@@ -6,13 +6,14 @@ import * as firebase from 'firebase'
 import 'vuetify/dist/vuetify.min.css'
 import './scss/main.scss'
 import colors from 'vuetify/es5/util/colors'
+import VueLazyload from 'vue-lazyload'
 import router from './router'
 import { store } from './store'
 import DateFilter from './filters/date'
 import DateTimeFilter from './filters/dateTime'
 import SeoTitleFilter from './filters/seoTitle'
 import AlertComponent from './components/Shared/Alert.vue'
-import BarChart from './components/shared/BarChart.js'
+import BarChartComponent from './components/Shared/BarChart.vue'
 
 Vue.use(Vuetify, {
   theme: {
@@ -27,6 +28,7 @@ Vue.use(Vuetify, {
 })
 
 Vue.use(VueCarousel)
+Vue.use(VueLazyload)
 
 Vue.config.productionTip = false
 
@@ -34,7 +36,7 @@ Vue.filter('date', DateFilter)
 Vue.filter('dateTime', DateTimeFilter)
 Vue.filter('seoTitle', SeoTitleFilter)
 Vue.component('app-alert', AlertComponent)
-Vue.component('bar-chart', BarChart)
+Vue.component('app-bar-chart', BarChartComponent)
 
 /* eslint-disable no-new */
 new Vue({
