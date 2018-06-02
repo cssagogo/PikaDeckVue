@@ -55,7 +55,7 @@
                 <app-bar-chart
                   dark
                   v-if="chartDataReady"
-                  :chart-data="arrayOfObjects(stats.supertype)"
+                  :chart-data="stats.supertype"
                   :chart-label="`Number of Cards`"
                   :height="100"></app-bar-chart>
               </v-flex>
@@ -65,7 +65,7 @@
         </v-card>
 
         <template>
-          <v-expansion-panel expand>
+          <v-expansion-panel expand  class="mb-1">
             <v-expansion-panel-content>
               <div slot="header">
                 <v-icon>bar_chart</v-icon>
@@ -229,7 +229,7 @@
         </template>
 
         <v-layout row wrap>
-          <v-flex xs12 sm6 md4 lg2 xl2
+          <v-flex xs6 sm4 md3 lg2 xl2
                   v-for="card in cards"
                   :key="card.id">
             <v-card>
@@ -417,15 +417,17 @@
           )
       },
       arrayOfObjects (object) {
-        let newArray = []
-        for (let key in object) {
-          let newObject = {
-            name: key,
-            value: object[key]
-          }
-          newArray.push(newObject)
+        if (!object) {
+          return []
         }
-        return newArray.sort(this.orderByMultiple('-value|number'))
+        return Object.keys(object)
+          .map(key => {
+            return {
+              name: key,
+              value: object[key]
+            }
+          })
+          .sort(this.orderByMultiple('-value|number'))
       }
     },
     mounted () {

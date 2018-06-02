@@ -81,18 +81,12 @@
       },
       finalData () {
         let formatted = this.baseData
-        if (this.chartData && this.chartData.constructor === Array) {
-          let newLabels = []
-          let newData = []
-          for (let item of this.chartData) {
-            newLabels.push(item.name)
-            newData.push(item.value)
-          }
+        if (this.chartData && this.chartData.constructor === Object) {
           formatted = {
-            labels: newLabels,
+            labels: Object.keys(this.chartData),
             datasets: [{
               label: this.chartLabel || 'Count',
-              data: newData,
+              data: Object.values(this.chartData),
               backgroundColor: (this.dark) ? this.darkBackgroundColor : this.baseBackgroundColor,
               borderColor: (this.dark) ? this.darkBorderColor : this.baseBorderColor,
               borderWidth: 1

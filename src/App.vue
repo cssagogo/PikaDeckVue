@@ -87,11 +87,15 @@
 
 
     </v-toolbar>
-    <v-content>
+
+
+    <v-content class="primary lighten-1">
       <v-container fluid>
         <router-view></router-view>
       </v-container>
     </v-content>
+
+
   </v-app>
 </template>
 
@@ -114,7 +118,7 @@
           menuItems = [
             { icon: 'dashboard', title: 'Your Dashboard', link: '/dashboard' },
             { icon: 'person', title: 'Your Profile', link: '/profile' },
-            { icon: 'library_add', title: 'Create Deck', link: '/deck/new' },
+            { icon: 'library_add', title: 'Create Deck', link: '/deck/new' }
           ]
         }
         return menuItems
