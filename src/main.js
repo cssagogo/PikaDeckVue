@@ -15,6 +15,7 @@ import SeoTitleFilter from './filters/seoTitle'
 import AlertComponent from './components/Shared/Alert.vue'
 import BarChartComponent from './components/Shared/BarChart.vue'
 import CardInfoComponent from './components/Shared/CardInfo.vue'
+import EnergyIconComponent from './components/Shared/EnergyIcon.vue'
 
 Vue.use(Vuetify, {
   theme: {
@@ -35,9 +36,11 @@ Vue.config.productionTip = false
 Vue.filter('date', DateFilter)
 Vue.filter('dateTime', DateTimeFilter)
 Vue.filter('seoTitle', SeoTitleFilter)
+
 Vue.component('app-alert', AlertComponent)
 Vue.component('app-bar-chart', BarChartComponent)
 Vue.component('app-card-info', CardInfoComponent)
+Vue.component('app-energy-icon', EnergyIconComponent)
 
 /* eslint-disable no-new */
 new Vue({

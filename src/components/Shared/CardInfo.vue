@@ -10,8 +10,11 @@
                 {{ card.supertype }}<span v-if="card.subtype">-{{ card.subtype }}</span>
             </v-flex>
             <v-flex xs5 v-if="card.hp" class="white--text headline text-xs-right">
-                <small>HP</small>{{ card.hp }}
-                <span v-if="card.types" v-for="energy in card.types">{{ energy }}</span>
+              <small>HP</small>{{ card.hp }}
+              <app-energy-icon
+                v-if="card.types"
+                v-for="energy in card.types"
+                :type="energy"></app-energy-icon>
             </v-flex>
           </v-layout>
 
@@ -43,7 +46,10 @@
 
           <v-layout row wrap>
             <v-flex v-if="attack.name" xs8 class="title">
-              <span v-if="attack.cost" v-for="energy in attack.cost">{{ energy }}</span>
+              <app-energy-icon
+                v-if="attack.cost"
+                v-for="energy in attack.cost"
+                :type="energy"></app-energy-icon>
               {{ attack.name }}
             </v-flex>
             <v-flex v-if="attack.damage" xs4 class="title text-xs-right">
@@ -56,7 +62,6 @@
         </v-flex>
       </v-layout>
 
-
       <v-card v-if="card.weaknesses || card.resistances || card.retreatCost"
               class="my-3 elevation-0 blue-grey lighten-5">
         <v-card-text>
@@ -64,21 +69,28 @@
             <v-flex xs4>
               <div class="title">Weaknesses</div>
               <span v-if="card.weaknesses"
-                    v-for="weakness in card.weaknesses">
-                {{ weakness.type }} {{ weakness.value }}
+                v-for="weakness in card.weaknesses">
+                 <app-energy-icon
+                  :type="weakness.type"></app-energy-icon>
+                {{ weakness.value }}
               </span>
             </v-flex>
             <v-flex xs4>
               <div class="title">Resistances</div>
               <span v-if="card.resistances"
-                    v-for="resistance in card.resistances">
-                {{ resistance.type }} {{ resistance.value }}
+                  v-for="resistance in card.resistances">
+                 <app-energy-icon
+                   :type="resistance.type"></app-energy-icon>
+                {{ resistance.value }}
               </span>
             </v-flex>
             <v-flex xs4>
               <div class="title">Retreat Cost</div>
               <span v-if="card.retreatCost"
-                    v-for="energy in card.retreatCost">{{ energy }}</span>
+                v-for="energy in card.retreatCost">
+                 <app-energy-icon
+                   :type="energy"></app-energy-icon>
+              </span>
             </v-flex>
           </v-layout>
         </v-card-text>
