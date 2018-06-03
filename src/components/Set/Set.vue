@@ -238,6 +238,7 @@
                 <v-layout row>
                   <v-flex x12 class="text-xs-center">
                     <img v-lazy="card.imageUrl"
+                         @click="openCardDialog(index)"
                          style="height:auto;width:100%;display: block">
                   </v-flex>
                 </v-layout>
@@ -277,8 +278,8 @@
             <v-divider></v-divider>
             <v-card-actions>
               <v-spacer></v-spacer>
-              <v-btn color="green darken-1" flat="flat" @click="cardDialog = false">Disagree</v-btn>
-              <v-btn color="green darken-1" flat="flat" @click="cardDialog = false">Agree</v-btn>
+              <!--<v-btn color="green darken-1" flat="flat" @click="cardDialog = false">Disagree</v-btn>-->
+              <v-btn color="green darken-1" flat="flat" @click="cardDialog = false">Close</v-btn>
             </v-card-actions>
           </v-card>
         </v-dialog>

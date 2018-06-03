@@ -57,8 +57,70 @@
       </v-layout>
 
 
+      <v-card v-if="card.weaknesses || card.resistances || card.retreatCost"
+              class="my-3 elevation-0 blue-grey lighten-5">
+        <v-card-text>
+          <v-layout row>
+            <v-flex xs4>
+              <div class="title">Weaknesses</div>
+              <span v-if="card.weaknesses"
+                    v-for="weakness in card.weaknesses">
+                {{ weakness.type }} {{ weakness.value }}
+              </span>
+            </v-flex>
+            <v-flex xs4>
+              <div class="title">Resistances</div>
+              <span v-if="card.resistances"
+                    v-for="resistance in card.resistances">
+                {{ resistance.type }} {{ resistance.value }}
+              </span>
+            </v-flex>
+            <v-flex xs4>
+              <div class="title">Retreat Cost</div>
+              <span v-if="card.retreatCost"
+                    v-for="energy in card.retreatCost">{{ energy }}</span>
+            </v-flex>
+          </v-layout>
+        </v-card-text>
+      </v-card>
 
-      {{ card }}
+      <v-layout row class="my-3">
+        <v-flex xs8>
+          <div class="title">
+            <img :src="set.symbolUrl" height="20px"> {{ card.set }}
+          </div>
+          <div>
+            {{ card.series }}
+            | Set Code: {{ card.setCode }}
+            | PTCGO Code: {{ set.ptcgoCode }}
+          </div>
+          <div>
+            Released: {{ set.releaseDate }}
+            | Tournament Type: <span v-if="set">{{ tournamentType }}</span>
+          </div>
+        </v-flex>
+        <v-flex xs4>
+          <div class="title text-xs-right">
+            {{ card.number }} / {{ set.totalCards }}
+          </div>
+        </v-flex>
+      </v-layout>
+
+      <v-divider></v-divider>
+
+      <v-layout row class="my-3">
+        <v-flex xs6>
+          Artist:
+          {{ card.artist }}
+        </v-flex>
+        <v-flex xs6
+          class="text-xs-right"
+          v-if="card.nationalPokedexNumber">
+          National Pokedex:
+          {{ card.nationalPokedexNumber }}
+        </v-flex>
+      </v-layout>
+
     </v-flex>
   </v-layout>
 </template>
@@ -66,6 +128,14 @@
 <script>
   export default {
     props: ['card'],
+    computed: {
+      set () {
+        return this.$store.getters.loadedSet(this.card.setCode)
+      },
+      tournamentType () {
+        return (this.set.standardLegal) ? 'Standard' : (this.set.expandedLegal) ? 'Expanded' : 'Unlimited'
+      }
+    },
     methods: {
     }
   }
