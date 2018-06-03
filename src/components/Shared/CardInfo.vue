@@ -7,7 +7,7 @@
 
           <v-layout row>
             <v-flex xs7 v-if="card.supertype" class="headline white--text">
-                {{ card.supertype }}<span v-if="card.subtype">-{{ card.subtype }}</span>
+              {{ card.supertype }}<span v-if="card.subtype">-{{ card.subtype }}</span>
             </v-flex>
             <v-flex xs5 v-if="card.hp" class="white--text headline text-xs-right">
               <small>HP</small>{{ card.hp }}
