@@ -14,6 +14,7 @@ import DateTimeFilter from './filters/dateTime'
 import SeoTitleFilter from './filters/seoTitle'
 import AlertComponent from './components/Shared/Alert.vue'
 import BarChartComponent from './components/Shared/BarChart.vue'
+import CardInfoComponent from './components/Shared/CardInfo.vue'
 
 Vue.use(Vuetify, {
   theme: {
@@ -26,7 +27,6 @@ Vue.use(Vuetify, {
     success: colors.green.base
   }
 })
-
 Vue.use(VueCarousel)
 Vue.use(VueLazyload)
 
@@ -37,6 +37,7 @@ Vue.filter('dateTime', DateTimeFilter)
 Vue.filter('seoTitle', SeoTitleFilter)
 Vue.component('app-alert', AlertComponent)
 Vue.component('app-bar-chart', BarChartComponent)
+Vue.component('app-card-info', CardInfoComponent)
 
 /* eslint-disable no-new */
 new Vue({

@@ -230,7 +230,7 @@
 
         <v-layout row wrap>
           <v-flex xs6 sm4 md3 lg2 xl2
-                  v-for="card in cards"
+                  v-for="(card, index) in cards"
                   :key="card.id">
             <v-card>
               <v-card-media
@@ -249,9 +249,9 @@
                     <v-icon>more_vert</v-icon>
                   </v-btn>
                   <v-list>
-                    <v-list-tile v-for="(item, i) in items" :key="i" @click="">
+                    <v-list-tile @click="openCardDialog(index)">
                       <v-list-tile-title>
-                        <v-icon left>favorite</v-icon> {{ item.title }}
+                        <v-icon left>info</v-icon> More Info
                       </v-list-tile-title>
                     </v-list-tile>
                   </v-list>
@@ -260,6 +260,28 @@
             </v-card>
           </v-flex>
         </v-layout>
+
+        <v-dialog v-model="cardDialog" v-if="cardDialog" scrollable max-width="800">
+          <v-card>
+            <v-card-title class="headline">
+              <span>{{ cardData.name }}</span>
+              <v-spacer></v-spacer>
+              <v-btn icon  @click="cardDialog = false">
+                <v-icon>close</v-icon>
+              </v-btn>
+            </v-card-title>
+            <v-divider></v-divider>
+            <v-card-text>
+              <app-card-info v-if="cardData" :card="cardData"></app-card-info>
+            </v-card-text>
+            <v-divider></v-divider>
+            <v-card-actions>
+              <v-spacer></v-spacer>
+              <v-btn color="green darken-1" flat="flat" @click="cardDialog = false">Disagree</v-btn>
+              <v-btn color="green darken-1" flat="flat" @click="cardDialog = false">Agree</v-btn>
+            </v-card-actions>
+          </v-card>
+        </v-dialog>
 
       </v-flex>
     </v-layout>
@@ -274,12 +296,10 @@
   export default {
     props: ['code'],
     data: () => ({
+      cardIndex: false,
+      cardDialog: false,
       chartDataReady: false,
-      cards: [],
-      items: [
-        { title: 'Card Info' },
-        { title: 'Print Play Set' }
-      ]
+      cards: []
     }),
     computed: {
       loading () {
@@ -347,9 +367,16 @@
       },
       chartData () {
         return this.stats.supertype
+      },
+      cardData () {
+        return this.cards[this.cardIndex]
       }
     },
     methods: {
+      openCardDialog (index) {
+        this.cardIndex = index
+        this.cardDialog = true
+      },
       orderBy (property) {
         property = property.replace(/\s/g, '')
         let sortNumber = 0
