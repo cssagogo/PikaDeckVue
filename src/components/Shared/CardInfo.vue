@@ -13,7 +13,8 @@
               <small>HP</small>{{ card.hp }}
               <app-energy-icon
                 v-if="card.types"
-                v-for="energy in card.types"
+                v-for="(energy, index) in card.types"
+                :key="`card-type-${index}`"
                 :type="energy"></app-energy-icon>
             </v-flex>
           </v-layout>
@@ -28,7 +29,10 @@
       </v-card>
 
       <v-layout row wrap v-if="card.text">
-        <v-flex xs12 v-for="text in card.text" class="my-2">
+        <v-flex xs12
+                v-for="(text, index) in card.text"
+                :key="`card-text-${index}`"
+                class="my-2">
           {{ text }}
         </v-flex>
       </v-layout>
@@ -42,13 +46,17 @@
       </v-layout>
 
       <v-layout row wrap v-if="card.attacks">
-        <v-flex xs12 v-for="attack in card.attacks" class="my-2">
+        <v-flex xs12
+                v-for="(attack, index) in card.attacks"
+                :key="`attack-${index}`"
+                class="my-2">
 
           <v-layout row wrap>
             <v-flex v-if="attack.name" xs8 class="title">
               <app-energy-icon
                 v-if="attack.cost"
-                v-for="energy in attack.cost"
+                v-for="(energy, index) in attack.cost"
+                :key="`attack-cost-${index}`"
                 :type="energy"></app-energy-icon>
               {{ attack.name }}
             </v-flex>
@@ -69,7 +77,8 @@
             <v-flex xs4>
               <div class="title">Weaknesses</div>
               <span v-if="card.weaknesses"
-                v-for="weakness in card.weaknesses">
+                    v-for="(weakness, index) in card.weaknesses"
+                    :key="`weakness-${index}`">
                  <app-energy-icon
                   :type="weakness.type"></app-energy-icon>
                 {{ weakness.value }}
@@ -78,7 +87,8 @@
             <v-flex xs4>
               <div class="title">Resistances</div>
               <span v-if="card.resistances"
-                  v-for="resistance in card.resistances">
+                    v-for="(resistance, index) in card.resistances"
+                    :key="`resistance-${index}`">
                  <app-energy-icon
                    :type="resistance.type"></app-energy-icon>
                 {{ resistance.value }}
@@ -87,7 +97,8 @@
             <v-flex xs4>
               <div class="title">Retreat Cost</div>
               <span v-if="card.retreatCost"
-                v-for="energy in card.retreatCost">
+                    v-for="(energy, index) in card.retreatCost"
+                    :key="`retreat-${index}`">
                  <app-energy-icon
                    :type="energy"></app-energy-icon>
               </span>

@@ -18,25 +18,18 @@
             <img :src="set.symbolUrl" height="20px"> {{ set.name }}
           </v-toolbar-title>
           <v-spacer></v-spacer>
+          <app-print-cards
+            :card-list="cards"
+            v-if="cards"></app-print-cards>
           <!--<v-btn icon>-->
-            <!--<v-icon>favorite</v-icon>-->
+          <!--<v-icon>favorite</v-icon>-->
           <!--</v-btn>-->
-          <v-btn icon>
-            <v-icon>bookmark</v-icon>
-          </v-btn>
-          <v-btn icon>
-            <v-icon>share</v-icon>
-          </v-btn>
-          <!--<v-menu bottom left class="mr-0">-->
-            <!--<v-btn slot="activator" icon>-->
-              <!--<v-icon>more_vert</v-icon>-->
-            <!--</v-btn>-->
-            <!--<v-list>-->
-              <!--<v-list-tile v-for="(item, i) in items" :key="i" @click="">-->
-                <!--<v-list-tile-title>{{ item.title }}</v-list-tile-title>-->
-              <!--</v-list-tile>-->
-            <!--</v-list>-->
-          <!--</v-menu>-->
+          <!--<v-btn icon>-->
+            <!--<v-icon>bookmark</v-icon>-->
+          <!--</v-btn>-->
+          <!--<v-btn icon>-->
+            <!--<v-icon>share</v-icon>-->
+          <!--</v-btn>-->
         </v-toolbar>
 
         <v-card class="cyan mb-2">
@@ -245,14 +238,23 @@
               </v-card-media>
               <v-card-actions>
                 <v-spacer></v-spacer>
-                <v-menu bottom left>
+                <v-menu :nudge-width="150" bottom left>
                   <v-btn slot="activator" icon>
                     <v-icon>more_vert</v-icon>
                   </v-btn>
                   <v-list>
+                    <app-print-cards
+                      :play-set="card"
+                      display-as="list"
+                      v-if="card"></app-print-cards>
                     <v-list-tile @click="openCardDialog(index)">
                       <v-list-tile-title>
-                        <v-icon left>info</v-icon> More Info
+                        <v-icon left>info</v-icon> Details
+                      </v-list-tile-title>
+                    </v-list-tile>
+                    <v-list-tile @click="openCardZoomDialog(index)">
+                      <v-list-tile-title>
+                        <v-icon left>zoom_in</v-icon> Zoom
                       </v-list-tile-title>
                     </v-list-tile>
                   </v-list>
@@ -284,6 +286,22 @@
           </v-card>
         </v-dialog>
 
+        <v-dialog v-model="cardZoomDialog" v-if="cardZoomDialog" scrollable max-width="800">
+          <v-card>
+            <v-card-title class="headline">
+              <span>{{ cardData.name }}</span>
+              <v-spacer></v-spacer>
+              <v-btn icon  @click="cardZoomDialog = false">
+                <v-icon>close</v-icon>
+              </v-btn>
+            </v-card-title>
+            <v-divider></v-divider>
+            <v-card-text>
+              <img v-lazy="cardData.imageUrlHiRes" style="width: 100%; height: auto">
+            </v-card-text>
+          </v-card>
+        </v-dialog>
+
       </v-flex>
     </v-layout>
 
@@ -299,6 +317,7 @@
     data: () => ({
       cardIndex: false,
       cardDialog: false,
+      cardZoomDialog: false,
       chartDataReady: false,
       cards: []
     }),
@@ -377,6 +396,10 @@
       openCardDialog (index) {
         this.cardIndex = index
         this.cardDialog = true
+      },
+      openCardZoomDialog (index) {
+        this.cardIndex = index
+        this.cardZoomDialog = true
       },
       orderBy (property) {
         property = property.replace(/\s/g, '')
