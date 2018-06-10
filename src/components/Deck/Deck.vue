@@ -114,3 +114,10 @@
     })
   }
 </script>
+
+<style scoped>
+  .card >>> .card__media__background {
+    background-position: top center !important;
+    background-size: auto;
+  }
+</style>

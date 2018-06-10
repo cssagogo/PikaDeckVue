@@ -60,28 +60,12 @@
         <carousel
           :scrollPerPage="true"
           :paginationSize="20"
-          :perPageCustom="[[768, 3], [1024, 4], [1200, 4]]">
+          :perPageCustom="[[768, 3], [1024, 3], [1200, 3]]">
           <slide
             v-for="set in sets"
             :key="set.code"
             class="pa-2">
-            <v-card
-              hover
-              :to="setPath(set)">
-              <v-card-title primary-title class="text-xs-center">
-                <v-layout row>
-                  <v-flex x12 class="text-xs-center">
-                    <img :src="set.logoUrl"
-                         style="max-height:60px;max-width:100%;">
-                    <h3 class="mb-0">
-                      <img :src="set.symbolUrl" height="16px">
-                      {{ set.name }}
-                    </h3>
-                    <div>{{ set.releaseDate | date }}</div>
-                  </v-flex>
-                </v-layout>
-              </v-card-title>
-            </v-card>
+            <app-set-card :set="set"></app-set-card>
           </slide>
         </carousel>
       </v-flex>

@@ -10,33 +10,27 @@
       </v-flex>
     </v-layout>
     <v-layout row wrap v-if="!loading">
-      <v-flex xs12 sm6 md4 lg3
-        v-for="set in sets"
-        :key="set.code">
-        <v-card
-          hover
-          :to="setPath(set)">
-          <v-card-media
-            class="px-3 py-2">
-            <v-layout row>
-              <v-flex x12 class="text-xs-center set-logo">
-                <img v-lazy="set.logoUrl"
-                     class="set-logo__image">
-              </v-flex>
-            </v-layout>
-          </v-card-media>
-          <v-card-actions>
-            <v-layout xs12>
-              <v-flex class="text-xs-center">
-                <h3 class="mb-0">
-                  <img v-lazy="set.symbolUrl" height="20px">
-                  {{ set.name }}
-                </h3>
-                <div>{{ set.series }} Series | {{ set.releaseDate | date }}</div>
-              </v-flex>
-            </v-layout>
-          </v-card-actions>
-        </v-card>
+      <v-flex xs12>
+
+        <v-data-iterator
+          v-if="sets"
+          :items="sets"
+          :rows-per-page-items="rowsPerPageItems"
+          :pagination.sync="pagination"
+          content-tag="v-layout"
+          row
+          wrap>
+          <v-flex
+            slot="item"
+            slot-scope="props"
+            xs12
+            sm6
+            md4
+            lg3>
+            <app-set-card :set="props.item"></app-set-card>
+          </v-flex>
+        </v-data-iterator>
+
       </v-flex>
     </v-layout>
   </v-container>
@@ -44,6 +38,12 @@
 
 <script>
   export default {
+    data: () => ({
+      rowsPerPageItems: [12, 24, 48, {'text': 'All', 'value': -1}],
+      pagination: {
+        rowsPerPage: 12
+      }
+    }),
     computed: {
       loading () {
         return this.$store.getters.loading
@@ -51,30 +51,8 @@
       sets () {
         return this.$store.getters.loadedSets
       }
-    },
-    methods: {
-      setPath (set) {
-        // TODO: Is doing this as a method best pracice?
-        return '/sets/' + set.code + '/' + this.$options.filters.seoTitle(set.name)
-      }
     }
   }
 </script>
 
-<style lang="scss" scoped>
-  /* TODO: Should this be a global style? */
-  .set-logo {
-    height: 150px;
-    line-height: 150px;
 
-    &__image {
-      max-height: 100%;
-      max-width: 100%;
-      height: auto;
-      width: auto !important;
-      display: inline-block;
-      line-height: 1.5;
-      vertical-align: middle;
-    }
-  }
-</style>

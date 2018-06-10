@@ -20,6 +20,7 @@ import CardInfoComponent from './components/Shared/CardInfo.vue'
 import EnergyIconComponent from './components/Shared/EnergyIcon.vue'
 import PrintCardsComponent from './components/Shared/PrintCards.vue'
 import SearchDialogComponent from './components/Shared/SearchDialog.vue'
+import SetCardComponent from './components/Shared/SetCard.vue'
 
 Vue.use(Vuetify, {
   theme: {
@@ -48,6 +49,7 @@ Vue.component('app-card-list', CardListComponent)
 Vue.component('app-energy-icon', EnergyIconComponent)
 Vue.component('app-print-cards', PrintCardsComponent)
 Vue.component('app-search-dialog', SearchDialogComponent)
+Vue.component('app-set-card', SetCardComponent)
 
 /* eslint-disable no-new */
 new Vue({
