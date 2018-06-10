@@ -5,8 +5,6 @@
       </v-btn>
       <v-card style="background: rgba(0,0,0,0.9)">
         <v-toolbar dark color="grey darken-3">
-          <!--<v-toolbar-title>Search</v-toolbar-title>-->
-          <input type="text" id="search" placeholder="Search">
           <v-text-field
             ref="search"
             prepend-icon="search"

@@ -33,7 +33,7 @@
       </v-list>
     </v-navigation-drawer>
 
-    <v-toolbar app dark class="primary elevation-1" >
+    <v-toolbar v-if="!this.$route.meta.createDeck" app dark class="primary elevation-1" >
 
       <v-toolbar-side-icon
         @click.stop="sideNav = !sideNav"
@@ -55,6 +55,7 @@
       <v-spacer></v-spacer>
 
       <v-btn
+        v-if="userIsAuthenticated"
         router
         to="/deck/new"
         class="accent">Create Deck</v-btn>

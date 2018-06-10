@@ -3,11 +3,23 @@
     <v-layout row wrap>
       <v-flex xs12>
 
-        <v-form @submit.prevent="getCards">
+        <v-layout wrap style="height: 200px;">
+          <v-container>
+            <v-layout justify-center>
+              <v-btn dark color="pink" @click.stop="drawer = !drawer">
+                <v-icon>filter_list</v-icon>
+              </v-btn>
+            </v-layout>
+          </v-container>
+          <v-navigation-drawer
+            v-model="drawer"
+            temporary
+            fixed
+            right
+          >
+            <v-form @submit.prevent="getCards" class="pa-2">
 
-              <div class="white" style="border: 1px solid rgba(60,60,60,.26);border-radius: 4px;">
-                <input v-model="name" class="white" type="text" value="" placeholder="Search">
-              </div>
+
 
 
               Energy Types
@@ -43,13 +55,27 @@
                 :options="$store.state.loadedSets"
               ></v-select>
 
+              <v-layout row>
+                <v-flex xs12>
+                  <v-btn class="primary ml-0"
+                         type="submit">Apply</v-btn>
+                </v-flex>
+              </v-layout>
+
+            </v-form>
+          </v-navigation-drawer>
+        </v-layout>
+
+        <v-form @submit.prevent="getCards" class="pa-2">
+          <div class="white" style="border: 1px solid rgba(60,60,60,.26);border-radius: 4px;">
+            <input v-model="name" id="search-box" class="white" type="text" value="" placeholder="Search">
+          </div>
           <v-layout row>
             <v-flex xs12>
               <v-btn class="primary ml-0"
-                 type="submit">Search</v-btn>
+                     type="submit">Search</v-btn>
             </v-flex>
           </v-layout>
-
         </v-form>
 
         <app-card-list v-if="cards" :cards="cards"></app-card-list>
@@ -70,7 +96,12 @@
         subtype: '',
         supertype: '',
         set: '',
-        cards: []
+        cards: [],
+        drawer: null,
+        items: [
+          { title: 'Home', icon: 'dashboard' },
+          { title: 'About', icon: 'question_answer' }
+        ]
       }
     },
     methods: {

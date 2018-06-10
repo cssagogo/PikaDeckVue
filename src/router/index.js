@@ -25,6 +25,7 @@ export default new Router({
     {
       path: '/search',
       name: 'Search',
+      boom: true,
       component: Search
     },
     {
@@ -42,6 +43,9 @@ export default new Router({
       path: '/deck/new',
       name: 'BuildDeck',
       component: BuildDeck,
+      meta: {
+        createDeck: true
+      },
       beforeEnter: AuthGuard
     },
     {
