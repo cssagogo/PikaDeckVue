@@ -1,6 +1,7 @@
 import Vue from 'vue'
 import Router from 'vue-router'
 import Home from '@/components/Home'
+import Search from '@/components/Search'
 import Decks from '@/components/Deck/Decks'
 import Deck from '@/components/Deck/Deck'
 import BuildDeck from '@/components/Deck/BuildDeck'
@@ -20,6 +21,11 @@ export default new Router({
       path: '/',
       name: 'Home',
       component: Home
+    },
+    {
+      path: '/search',
+      name: 'Search',
+      component: Search
     },
     {
       path: '/decks',

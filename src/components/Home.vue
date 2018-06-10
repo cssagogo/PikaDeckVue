@@ -1,24 +1,6 @@
 <template>
   <v-container grid-list-xs fluid>
 
-
-    <v-layout row wrap>
-      <v-flex xs12 sm6 class="text-xs-center text-sm-right">
-        <v-btn
-          large
-          router
-          to="/decks"
-          class="accent">Explore Decks</v-btn>
-      </v-flex>
-      <v-flex xs12 sm6 class="text-xs-center text-sm-left">
-        <v-btn
-          large
-          router
-          to="/deck/new"
-          class="accent">Create Deck</v-btn>
-      </v-flex>
-    </v-layout>
-
     <v-layout row wrap v-if="loading">
       <v-flex xs12 class="text-xs-center">
         <v-progress-circular
@@ -42,7 +24,7 @@
               hover
               :to="'/decks/' + deck.id">
               <v-card-media
-                class="secondary darken-4 pt-1 text-xs-center">
+                class="pt-1 text-xs-center card-media--background">
                 <v-layout row>
                   <v-flex x12 class="text-xs-center">
                     <img :src="deck.imageUrl"
@@ -130,3 +112,10 @@
     }
   }
 </script>
+
+<style>
+  .card-media--background {
+    background-image: url('https://assets.pokemon.com/static2/_ui/img/chrome/body_bg.png');
+    background-repeat: repeat;
+  }
+</style>

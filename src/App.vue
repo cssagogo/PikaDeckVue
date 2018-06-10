@@ -1,7 +1,6 @@
 <template>
   <v-app>
 
-
     <v-navigation-drawer v-model="sideNav" app disable-resize-watcher>
       <v-list>
 
@@ -34,15 +33,14 @@
       </v-list>
     </v-navigation-drawer>
 
-
-    <v-toolbar app dark class="primary">
+    <v-toolbar app dark class="primary elevation-1" >
 
       <v-toolbar-side-icon
         @click.stop="sideNav = !sideNav"
         class="hidden-sm-and-up"></v-toolbar-side-icon>
 
       <v-toolbar-title class="mr-4">
-        <router-link to="/" tag="span" style="cursor: pointer">PikaDeck</router-link>
+        <router-link class="logo__text" to="/" tag="span" style="cursor: pointer">PikaDeck</router-link>
       </v-toolbar-title>
 
       <v-toolbar-items class="hidden-xs-only">
@@ -56,6 +54,10 @@
 
       <v-spacer></v-spacer>
 
+      <v-btn
+        router
+        to="/deck/new"
+        class="accent">Create Deck</v-btn>
 
       <v-menu :nudge-width="150" :nudge-bottom="12" offset-y right>
         <v-btn flat icon slot="activator">
@@ -81,20 +83,15 @@
         </v-list>
       </v-menu>
 
-      <v-btn flat icon>
-        <v-icon>search</v-icon>
-      </v-btn>
-
+      <app-search-dialog></app-search-dialog>
 
     </v-toolbar>
 
-
-    <v-content class="primary lighten-1">
+    <v-content class="content-main">
       <v-container fluid>
         <router-view></router-view>
       </v-container>
     </v-content>
-
 
   </v-app>
 </template>
@@ -135,3 +132,15 @@
     name: 'App'
   }
 </script>
+
+<style>
+  .logo__text {
+    font-family: 'Ranchers', cursive;
+    font-size: 2rem;
+    font-weight: 400;
+  }
+  .content-main {
+    background-image: url('https://assets.pokemon.com/static2/_ui/img/chrome/container_bg.png');
+    background-repeat: repeat;
+  }
+</style>

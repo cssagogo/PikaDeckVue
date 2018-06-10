@@ -1,13 +1,13 @@
 import Vue from 'vue'
 import VueCarousel from 'vue-carousel'
-import Vuetify from 'vuetify'
-
-import App from './App'
-import * as firebase from 'firebase'
-import 'vuetify/dist/vuetify.min.css'
-import './scss/main.scss'
-import colors from 'vuetify/es5/util/colors'
 import VueLazyload from 'vue-lazyload'
+import vSelect from 'vue-select'
+import Vuetify from 'vuetify'
+import 'vuetify/dist/vuetify.min.css'
+import colors from 'vuetify/es5/util/colors'
+import * as firebase from 'firebase'
+import App from './App'
+import './scss/main.scss'
 import router from './router'
 import { store } from './store'
 import DateFilter from './filters/date'
@@ -15,9 +15,11 @@ import DateTimeFilter from './filters/dateTime'
 import SeoTitleFilter from './filters/seoTitle'
 import AlertComponent from './components/Shared/Alert.vue'
 import BarChartComponent from './components/Shared/BarChart.vue'
+import CardListComponent from './components/Shared/CardList.vue'
 import CardInfoComponent from './components/Shared/CardInfo.vue'
 import EnergyIconComponent from './components/Shared/EnergyIcon.vue'
 import PrintCardsComponent from './components/Shared/PrintCards.vue'
+import SearchDialogComponent from './components/Shared/SearchDialog.vue'
 
 Vue.use(Vuetify, {
   theme: {
@@ -38,12 +40,14 @@ Vue.config.productionTip = false
 Vue.filter('date', DateFilter)
 Vue.filter('dateTime', DateTimeFilter)
 Vue.filter('seoTitle', SeoTitleFilter)
-
+Vue.component('v-select', vSelect)
 Vue.component('app-alert', AlertComponent)
 Vue.component('app-bar-chart', BarChartComponent)
 Vue.component('app-card-info', CardInfoComponent)
+Vue.component('app-card-list', CardListComponent)
 Vue.component('app-energy-icon', EnergyIconComponent)
 Vue.component('app-print-cards', PrintCardsComponent)
+Vue.component('app-search-dialog', SearchDialogComponent)
 
 /* eslint-disable no-new */
 new Vue({

@@ -42,7 +42,7 @@
                 :width="15"
                 :rotate="360"
                 :value="base64store.length"
-                color="cyan">
+                color="accent">
                 {{ base64store.length }}
               </v-progress-circular>
             </v-flex>
@@ -117,7 +117,7 @@
         })
         if (this.cards.length === this.base64store.length) {
           if (this.playSet) {
-            this.printPlaySet(this.base64store[0])
+            this.printPlaySet(this.base64store)
           }
           if (this.cardList) {
             this.printCardList(this.base64store)
