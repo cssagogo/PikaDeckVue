@@ -57,7 +57,7 @@
         v-if="userIsAuthenticated"
         router
         to="/deck/new"
-        class="accent">Create Deck</v-btn>
+        class="accent">New Deck</v-btn>
 
       <v-menu :nudge-width="150" :nudge-bottom="12" offset-y right>
         <v-btn flat icon slot="activator">

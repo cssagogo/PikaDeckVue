@@ -2,69 +2,121 @@
   <layout-build-deck>
     <v-container>
 
-    <v-layout row>
-      <v-flex x12 sm6 offset-sm3>
-        <h1>Start a New Deck</h1>
-      </v-flex>
-    </v-layout>
+          <v-toolbar
+            color="primary"
+            dark
+            fixed
+            app
+            clipped-right
+          >
+            <v-toolbar-side-icon @click.stop="drawer = !drawer"></v-toolbar-side-icon>
+            <v-text-field
+              flat
+              solo-inverted
+              prepend-icon="search"
+              label="Search"
+            ></v-text-field>
+            <v-spacer></v-spacer>
+            <v-btn flat icon @click.stop="right = !right">
+              <v-icon>filter_list</v-icon>
+            </v-btn>
+          </v-toolbar>
 
-    <v-layout row>
-      <v-flex x12>
-        <form @submit.prevent="onCreateDeck">
+          <v-navigation-drawer
+            fixed
+            v-model="drawer"
+            app
+          >
 
-          <v-layout row>
-            <v-flex x12 sm6 offset-sm3>
-              <v-text-field
-              name="title"
-              label="Title"
-              id="title"
-              v-model="title"
-              required></v-text-field>
-            </v-flex>
-          </v-layout>
+            <v-toolbar color="primary" dark>
+              <v-btn flat icon to="/">
+                <v-icon>arrow_back</v-icon>
+              </v-btn>
+              <v-toolbar-title>New Deck</v-toolbar-title>
+            </v-toolbar>
 
-          <v-layout row>
-            <v-flex x12 sm6 offset-sm3>
-              <v-text-field
-                name="imageUrl"
-                label="Image Url"
-                id="image-url"
-                v-model="imageUrl"
-                required></v-text-field>
-            </v-flex>
-          </v-layout>
+            <form @submit.prevent="onCreateDeck" class="pa-2">
 
-          <v-layout row>
-            <v-flex x12 sm6 offset-sm3>
-              <img :src="imageUrl" width="200">
-            </v-flex>
-          </v-layout>
+              <v-layout row>
+                <v-flex x12>
+                  <v-text-field
+                    name="title"
+                    label="Title"
+                    id="title"
+                    v-model="title"
+                    required></v-text-field>
+                </v-flex>
+              </v-layout>
 
-          <v-layout row>
-            <v-flex x12 sm6 offset-sm3>
-              <v-text-field
-                name="description"
-                label="Description"
-                id="description"
-                multi-line
-                v-model="description"
-                required></v-text-field>
-            </v-flex>
-          </v-layout>
+              <v-layout row>
+                <v-flex x12>
+                  <v-text-field
+                    name="imageUrl"
+                    label="Image Url"
+                    id="image-url"
+                    v-model="imageUrl"
+                    required></v-text-field>
+                </v-flex>
+              </v-layout>
 
-          <v-layout row>
-            <v-flex xs12 sm6 offset-sm3>
-              <v-btn class="primary"
-                     :disabled="!formIsValid"
-                     type="submit">Create Deck</v-btn>
-            </v-flex>
-          </v-layout>
+              <v-layout row>
+                <v-flex x12>
+                  <img :src="imageUrl" width="200">
+                </v-flex>
+              </v-layout>
 
-        </form>
-      </v-flex>
-    </v-layout>
+              <v-layout row>
+                <v-flex x12>
+                  <v-text-field
+                    name="description"
+                    label="Description"
+                    id="description"
+                    multi-line
+                    v-model="description"
+                    required></v-text-field>
+                </v-flex>
+              </v-layout>
 
-  </v-container>
+              <v-layout row>
+                <v-flex xs12>
+                  <v-btn class="primary"
+                         :disabled="!formIsValid"
+                         type="submit">Create Deck</v-btn>
+                </v-flex>
+              </v-layout>
+
+            </form>
+
+          </v-navigation-drawer>
+
+          <v-content>
+            <v-container fluid fill-height>
+              <v-layout justify-center align-center>
+                <v-flex shrink>
+                  <v-tooltip right>
+                    <span>Source</span>
+                  </v-tooltip>
+                </v-flex>
+              </v-layout>
+            </v-container>
+          </v-content>
+
+          <v-navigation-drawer
+            right
+            temporary
+            v-model="right"
+            fixed
+          >
+            <v-toolbar color="white">
+              <v-btn flat icon @click.stop="right = !right">
+                <v-icon>close</v-icon>
+              </v-btn>
+              <v-toolbar-title>Filter</v-toolbar-title>
+            </v-toolbar>
+
+          </v-navigation-drawer>
+
+    </v-container>
   </layout-build-deck>
 </template>
 
@@ -72,6 +124,10 @@
   export default {
     data () {
       return {
+        drawer: true,
+        drawerRight: true,
+        right: null,
+        left: null,
         title: '',
         imageUrl: '',
         description: ''
