@@ -13,6 +13,7 @@ import { store } from './store'
 import DateFilter from './filters/date'
 import DateTimeFilter from './filters/dateTime'
 import SeoTitleFilter from './filters/seoTitle'
+import LayoutBasicComponent from './components/Layout/Basic.vue'
 import AlertComponent from './components/Shared/Alert.vue'
 import BarChartComponent from './components/Shared/BarChart.vue'
 import CardListComponent from './components/Shared/CardList.vue'
@@ -42,6 +43,7 @@ Vue.filter('date', DateFilter)
 Vue.filter('dateTime', DateTimeFilter)
 Vue.filter('seoTitle', SeoTitleFilter)
 Vue.component('v-select', vSelect)
+Vue.component('layout-basic', LayoutBasicComponent)
 Vue.component('app-alert', AlertComponent)
 Vue.component('app-bar-chart', BarChartComponent)
 Vue.component('app-card-info', CardInfoComponent)

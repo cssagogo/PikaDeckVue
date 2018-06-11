@@ -1,5 +1,6 @@
 <template>
-  <v-container grid-list-xl fluid>
+  <layout-basic>
+    <v-container grid-list-xl fluid>
     <v-layout row wrap v-if="loading">
       <v-flex xs12 class="text-xs-center">
         <v-progress-circular
@@ -34,6 +35,7 @@
       </v-flex>
     </v-layout>
   </v-container>
+  </layout-basic>
 </template>
 
 <script>

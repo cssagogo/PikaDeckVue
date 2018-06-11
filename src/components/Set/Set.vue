@@ -1,240 +1,242 @@
 <template>
-  <v-container grid-list-md fluid>
+  <layout-basic>
+    <v-container grid-list-md fluid>
 
-    <v-layout row wrap v-if="loading">
-      <v-flex xs12 class="text-xs-center">
-        <v-progress-circular
-          indeterminate
-          color="primary"
-          :width="7"
-          :size="70"></v-progress-circular>
-      </v-flex>
-    </v-layout>
-    <v-layout row wrap v-if="!loading">
-      <v-flex x12>
+      <v-layout row wrap v-if="loading">
+        <v-flex xs12 class="text-xs-center">
+          <v-progress-circular
+            indeterminate
+            color="primary"
+            :width="7"
+            :size="70"></v-progress-circular>
+        </v-flex>
+      </v-layout>
+      <v-layout row wrap v-if="!loading">
+        <v-flex x12>
 
-        <v-toolbar class="transparent elevation-0">
-          <v-toolbar-title class="ml-0">
-            <img :src="set.symbolUrl" height="20px"> {{ set.name }}
-          </v-toolbar-title>
-          <v-spacer></v-spacer>
-          <app-print-cards
-            :card-list="cards"
-            v-if="cards"></app-print-cards>
-          <!--<v-btn icon>-->
-          <!--<v-icon>favorite</v-icon>-->
-          <!--</v-btn>-->
-          <!--<v-btn icon>-->
-            <!--<v-icon>bookmark</v-icon>-->
-          <!--</v-btn>-->
-          <!--<v-btn icon>-->
-            <!--<v-icon>share</v-icon>-->
-          <!--</v-btn>-->
-        </v-toolbar>
+          <v-toolbar class="transparent elevation-0">
+            <v-toolbar-title class="ml-0">
+              <img :src="set.symbolUrl" height="20px"> {{ set.name }}
+            </v-toolbar-title>
+            <v-spacer></v-spacer>
+            <app-print-cards
+              :card-list="cards"
+              v-if="cards"></app-print-cards>
+            <!--<v-btn icon>-->
+            <!--<v-icon>favorite</v-icon>-->
+            <!--</v-btn>-->
+            <!--<v-btn icon>-->
+              <!--<v-icon>bookmark</v-icon>-->
+            <!--</v-btn>-->
+            <!--<v-btn icon>-->
+              <!--<v-icon>share</v-icon>-->
+            <!--</v-btn>-->
+          </v-toolbar>
 
-        <v-card class="accent mb-2">
-          <v-card-text
-            class="px-3 py-4">
+          <v-card class="accent mb-2">
+            <v-card-text
+              class="px-3 py-4">
 
-            <v-layout row>
-              <v-flex x12 class="text-xs-center set-logo">
-                <img :src="set.logoUrl"
-                     class="set-logo__image">
-              </v-flex>
-            </v-layout>
+              <v-layout row>
+                <v-flex x12 class="text-xs-center set-logo">
+                  <img :src="set.logoUrl"
+                       class="set-logo__image">
+                </v-flex>
+              </v-layout>
 
-            <v-layout row>
-              <v-flex xs12 sm12 md8 offset-md2>
-                <app-bar-chart
-                  dark
-                  v-if="chartDataReady"
-                  :chart-data="stats.supertype"
-                  :chart-label="`Number of Cards`"
-                  :height="100"></app-bar-chart>
-              </v-flex>
-            </v-layout>
+              <v-layout row>
+                <v-flex xs12 sm12 md8 offset-md2>
+                  <app-bar-chart
+                    dark
+                    v-if="chartDataReady"
+                    :chart-data="stats.supertype"
+                    :chart-label="`Number of Cards`"
+                    :height="100"></app-bar-chart>
+                </v-flex>
+              </v-layout>
 
-          </v-card-text>
-        </v-card>
+            </v-card-text>
+          </v-card>
 
-        <template>
-          <v-expansion-panel expand  class="mb-1">
-            <v-expansion-panel-content>
-              <div slot="header">
-                <v-icon>bar_chart</v-icon>
-                More Card Stats
-              </div>
-              <v-card class="grey lighten-4">
-                <v-card-text>
+          <template>
+            <v-expansion-panel expand  class="mb-1">
+              <v-expansion-panel-content>
+                <div slot="header">
+                  <v-icon>bar_chart</v-icon>
+                  More Card Stats
+                </div>
+                <v-card class="grey lighten-4">
+                  <v-card-text>
 
-                  <v-layout row wrap>
-                    <v-flex x12 sm6>
-                      <h2>
-                        <strong>HP:</strong> {{ stats.hp }}
-                      </h2>
-                    </v-flex>
-                    <v-flex x12 sm6 class="text-sm-right">
-                      <h3>{{ set.series }} Series released on {{ set.releaseDate | date }}</h3>
-                    </v-flex>
-                  </v-layout>
+                    <v-layout row wrap>
+                      <v-flex x12 sm6>
+                        <h2>
+                          <strong>HP:</strong> {{ stats.hp }}
+                        </h2>
+                      </v-flex>
+                      <v-flex x12 sm6 class="text-sm-right">
+                        <h3>{{ set.series }} Series released on {{ set.releaseDate | date }}</h3>
+                      </v-flex>
+                    </v-layout>
 
-                  <template>
-                    <v-tabs
-                      color="grey lighten-2"
-                      show-arrows>
-                      <v-tabs-slider color="accent"></v-tabs-slider>
-                      <v-tab href="#tab-types">
-                        Types
-                      </v-tab>
-                      <v-tab href="#tab-weaknesses">
-                        Weaknesses
-                      </v-tab>
-                      <v-tab href="#tab-resistances">
-                        Resistances
-                      </v-tab>
-                      <v-tab href="#tab-subtypes">
-                        Subtypes
-                      </v-tab>
-                      <v-tab href="#tab-rarity">
-                        Rarity
-                      </v-tab>
-                      <v-tab href="#tab-artists">
-                        Artists
-                      </v-tab>
-                      <!--<v-tab href="#tab-set">-->
-                      <!--Set-->
-                      <!--</v-tab>-->
-                      <!--<v-tab href="#tab-series">-->
-                      <!--Series-->
-                      <!--</v-tab>-->
+                    <template>
+                      <v-tabs
+                        color="grey lighten-2"
+                        show-arrows>
+                        <v-tabs-slider color="accent"></v-tabs-slider>
+                        <v-tab href="#tab-types">
+                          Types
+                        </v-tab>
+                        <v-tab href="#tab-weaknesses">
+                          Weaknesses
+                        </v-tab>
+                        <v-tab href="#tab-resistances">
+                          Resistances
+                        </v-tab>
+                        <v-tab href="#tab-subtypes">
+                          Subtypes
+                        </v-tab>
+                        <v-tab href="#tab-rarity">
+                          Rarity
+                        </v-tab>
+                        <v-tab href="#tab-artists">
+                          Artists
+                        </v-tab>
+                        <!--<v-tab href="#tab-set">-->
+                        <!--Set-->
+                        <!--</v-tab>-->
+                        <!--<v-tab href="#tab-series">-->
+                        <!--Series-->
+                        <!--</v-tab>-->
 
-                      <v-tabs-items>
-                        <v-tab-item id="tab-types">
-                          <v-list dense>
-                            <v-list-tile v-for="(item, i) in arrayOfObjects(stats.types)" :key="i">
-                              <v-list-tile-content>
-                                <v-layout row>
-                                  <v-flex xs12>
-                                    <app-energy-icon
-                                      :type="item.name"></app-energy-icon>
-                                    {{ item.name }}
-                                  </v-flex>
-                                </v-layout>
+                        <v-tabs-items>
+                          <v-tab-item id="tab-types">
+                            <v-list dense>
+                              <v-list-tile v-for="(item, i) in arrayOfObjects(stats.types)" :key="i">
+                                <v-list-tile-content>
+                                  <v-layout row>
+                                    <v-flex xs12>
+                                      <app-energy-icon
+                                        :type="item.name"></app-energy-icon>
+                                      {{ item.name }}
+                                    </v-flex>
+                                  </v-layout>
 
-                              </v-list-tile-content>
-                              <v-list-tile-action>
-                                {{ item.value }}
-                              </v-list-tile-action>
-                            </v-list-tile>
-                          </v-list>
-                        </v-tab-item>
-                        <v-tab-item id="tab-weaknesses">
-                          <v-list dense>
-                            <v-list-tile v-for="(item, i) in arrayOfObjects(stats.weaknesses)" :key="i">
-                              <v-list-tile-content>
-                                {{ item.name }}
-                              </v-list-tile-content>
-                              <v-list-tile-action>
-                                {{ item.value }}
-                              </v-list-tile-action>
-                            </v-list-tile>
-                          </v-list>
-                        </v-tab-item>
-                        <v-tab-item id="tab-resistances">
-                          <v-list dense>
-                            <v-list-tile v-for="(item, i) in arrayOfObjects(stats.resistances)" :key="i">
-                              <v-list-tile-content>
-                                {{ item.name }}
-                              </v-list-tile-content>
-                              <v-list-tile-action>
-                                {{ item.value }}
-                              </v-list-tile-action>
-                            </v-list-tile>
-                          </v-list>
-                        </v-tab-item>
-                        <v-tab-item id="tab-subtypes">
-                          <v-list dense>
-                            <v-list-tile v-for="(item, i) in arrayOfObjects(stats.subtype)" :key="i">
-                              <v-list-tile-content>
-                                {{ item.name }}
-                              </v-list-tile-content>
-                              <v-list-tile-action>
-                                {{ item.value }}
-                              </v-list-tile-action>
-                            </v-list-tile>
-                          </v-list>
-                        </v-tab-item>
-                        <v-tab-item id="tab-rarity">
-                          <v-list dense>
-                            <v-list-tile v-for="(item, i) in arrayOfObjects(stats.rarity)" :key="i">
-                              <v-list-tile-content>
-                                {{ item.name }}
-                              </v-list-tile-content>
-                              <v-list-tile-action>
-                                {{ item.value }}
-                              </v-list-tile-action>
-                            </v-list-tile>
-                          </v-list>
-                        </v-tab-item>
-                        <v-tab-item id="tab-artists">
-                          <v-layout row wrap>
-                            <v-flex x12>
-                              <div>
-                                <strong>Artists:</strong>
-                                <ul class="list-comma">
-                                  <li v-for="(item, key) in arrayOfObjects(stats.artist)">
-                                    {{ item.name }}
-                                  </li>
-                                </ul>
-                              </div>
-                            </v-flex>
-                          </v-layout>
-                        </v-tab-item>
-                        <!--<v-tab-item id="tab-set">-->
-                        <!--<v-list dense>-->
-                        <!--<v-list-tile v-for="(item, i) in arrayOfObjects(stats.set)" :key="i">-->
-                        <!--<v-list-tile-content>-->
-                        <!--{{ item.name }}-->
-                        <!--</v-list-tile-content>-->
-                        <!--<v-list-tile-action>-->
-                        <!--{{ item.value }}-->
-                        <!--</v-list-tile-action>-->
-                        <!--</v-list-tile>-->
-                        <!--</v-list>-->
-                        <!--</v-tab-item>-->
-                        <!--<v-tab-item id="tab-series">-->
-                        <!--<v-list dense>-->
-                        <!--<v-list-tile v-for="(item, i) in arrayOfObjects(stats.series)" :key="i">-->
-                        <!--<v-list-tile-content>-->
-                        <!--{{ item.name }}-->
-                        <!--</v-list-tile-content>-->
-                        <!--<v-list-tile-action>-->
-                        <!--{{ item.value }}-->
-                        <!--</v-list-tile-action>-->
-                        <!--</v-list-tile>-->
-                        <!--</v-list>-->
-                        <!--</v-tab-item>-->
-                      </v-tabs-items>
+                                </v-list-tile-content>
+                                <v-list-tile-action>
+                                  {{ item.value }}
+                                </v-list-tile-action>
+                              </v-list-tile>
+                            </v-list>
+                          </v-tab-item>
+                          <v-tab-item id="tab-weaknesses">
+                            <v-list dense>
+                              <v-list-tile v-for="(item, i) in arrayOfObjects(stats.weaknesses)" :key="i">
+                                <v-list-tile-content>
+                                  {{ item.name }}
+                                </v-list-tile-content>
+                                <v-list-tile-action>
+                                  {{ item.value }}
+                                </v-list-tile-action>
+                              </v-list-tile>
+                            </v-list>
+                          </v-tab-item>
+                          <v-tab-item id="tab-resistances">
+                            <v-list dense>
+                              <v-list-tile v-for="(item, i) in arrayOfObjects(stats.resistances)" :key="i">
+                                <v-list-tile-content>
+                                  {{ item.name }}
+                                </v-list-tile-content>
+                                <v-list-tile-action>
+                                  {{ item.value }}
+                                </v-list-tile-action>
+                              </v-list-tile>
+                            </v-list>
+                          </v-tab-item>
+                          <v-tab-item id="tab-subtypes">
+                            <v-list dense>
+                              <v-list-tile v-for="(item, i) in arrayOfObjects(stats.subtype)" :key="i">
+                                <v-list-tile-content>
+                                  {{ item.name }}
+                                </v-list-tile-content>
+                                <v-list-tile-action>
+                                  {{ item.value }}
+                                </v-list-tile-action>
+                              </v-list-tile>
+                            </v-list>
+                          </v-tab-item>
+                          <v-tab-item id="tab-rarity">
+                            <v-list dense>
+                              <v-list-tile v-for="(item, i) in arrayOfObjects(stats.rarity)" :key="i">
+                                <v-list-tile-content>
+                                  {{ item.name }}
+                                </v-list-tile-content>
+                                <v-list-tile-action>
+                                  {{ item.value }}
+                                </v-list-tile-action>
+                              </v-list-tile>
+                            </v-list>
+                          </v-tab-item>
+                          <v-tab-item id="tab-artists">
+                            <v-layout row wrap>
+                              <v-flex x12>
+                                <div>
+                                  <strong>Artists:</strong>
+                                  <ul class="list-comma">
+                                    <li v-for="(item, key) in arrayOfObjects(stats.artist)">
+                                      {{ item.name }}
+                                    </li>
+                                  </ul>
+                                </div>
+                              </v-flex>
+                            </v-layout>
+                          </v-tab-item>
+                          <!--<v-tab-item id="tab-set">-->
+                          <!--<v-list dense>-->
+                          <!--<v-list-tile v-for="(item, i) in arrayOfObjects(stats.set)" :key="i">-->
+                          <!--<v-list-tile-content>-->
+                          <!--{{ item.name }}-->
+                          <!--</v-list-tile-content>-->
+                          <!--<v-list-tile-action>-->
+                          <!--{{ item.value }}-->
+                          <!--</v-list-tile-action>-->
+                          <!--</v-list-tile>-->
+                          <!--</v-list>-->
+                          <!--</v-tab-item>-->
+                          <!--<v-tab-item id="tab-series">-->
+                          <!--<v-list dense>-->
+                          <!--<v-list-tile v-for="(item, i) in arrayOfObjects(stats.series)" :key="i">-->
+                          <!--<v-list-tile-content>-->
+                          <!--{{ item.name }}-->
+                          <!--</v-list-tile-content>-->
+                          <!--<v-list-tile-action>-->
+                          <!--{{ item.value }}-->
+                          <!--</v-list-tile-action>-->
+                          <!--</v-list-tile>-->
+                          <!--</v-list>-->
+                          <!--</v-tab-item>-->
+                        </v-tabs-items>
 
-                    </v-tabs>
-                  </template>
-
-
-
-
-                </v-card-text>
-              </v-card>
-            </v-expansion-panel-content>
-          </v-expansion-panel>
-        </template>
-
-        <app-card-list v-if="cards" :cards="cards"></app-card-list>
+                      </v-tabs>
+                    </template>
 
 
-      </v-flex>
-    </v-layout>
 
-  </v-container>
+
+                  </v-card-text>
+                </v-card>
+              </v-expansion-panel-content>
+            </v-expansion-panel>
+          </template>
+
+          <app-card-list v-if="cards" :cards="cards"></app-card-list>
+
+
+        </v-flex>
+      </v-layout>
+
+    </v-container>
+  </layout-basic>
 </template>
 
 

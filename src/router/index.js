@@ -43,9 +43,6 @@ export default new Router({
       path: '/deck/new',
       name: 'BuildDeck',
       component: BuildDeck,
-      meta: {
-        createDeck: true
-      },
       beforeEnter: AuthGuard
     },
     {
