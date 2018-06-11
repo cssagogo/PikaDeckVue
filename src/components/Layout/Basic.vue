@@ -132,7 +132,7 @@
 
 <style>
   .logo__text {
-    font-family: 'Ranchers', cursive;
+    font-family: 'Ranchers', SansSerif;
     font-size: 2rem;
     font-weight: 400;
   }

@@ -4,7 +4,7 @@ import Home from '@/components/Home'
 import Search from '@/components/Search'
 import Decks from '@/components/Deck/Decks'
 import Deck from '@/components/Deck/Deck'
-import BuildDeck from '@/components/Deck/BuildDeck'
+import NewDeck from '@/components/Deck/New'
 import Sets from '@/components/Set/Sets'
 import Set from '@/components/Set/Set'
 import Profile from '@/components/User/Profile'
@@ -41,8 +41,8 @@ export default new Router({
     },
     {
       path: '/deck/new',
-      name: 'BuildDeck',
-      component: BuildDeck,
+      name: 'New Deck',
+      component: NewDeck,
       beforeEnter: AuthGuard
     },
     {

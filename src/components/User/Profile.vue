@@ -1,5 +1,5 @@
 <template>
   <layout-basic>
-    <div>Profile View</div>
+    Profile View
   </layout-basic>
 </template>

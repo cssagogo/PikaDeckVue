@@ -1,5 +1,6 @@
 <template>
-  <v-container>
+  <layout-build-deck>
+    <v-container>
 
     <v-layout row>
       <v-flex x12 sm6 offset-sm3>
@@ -64,6 +65,7 @@
     </v-layout>
 
   </v-container>
+  </layout-build-deck>
 </template>
 
 <script>

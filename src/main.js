@@ -13,15 +13,16 @@ import { store } from './store'
 import DateFilter from './filters/date'
 import DateTimeFilter from './filters/dateTime'
 import SeoTitleFilter from './filters/seoTitle'
-import LayoutBasicComponent from './components/Layout/Basic.vue'
-import AlertComponent from './components/Shared/Alert.vue'
-import BarChartComponent from './components/Shared/BarChart.vue'
-import CardListComponent from './components/Shared/CardList.vue'
-import CardInfoComponent from './components/Shared/CardInfo.vue'
-import EnergyIconComponent from './components/Shared/EnergyIcon.vue'
-import PrintCardsComponent from './components/Shared/PrintCards.vue'
-import SearchDialogComponent from './components/Shared/SearchDialog.vue'
-import SetCardComponent from './components/Shared/SetCard.vue'
+import LayoutBasicComponent from './components/Layout/Basic'
+import LayoutBuildDeckComponent from './components/Layout/BuildDeck'
+import AlertComponent from './components/Shared/Alert'
+import BarChartComponent from './components/Shared/BarChart'
+import CardListComponent from './components/Shared/CardList'
+import CardInfoComponent from './components/Shared/CardInfo'
+import EnergyIconComponent from './components/Shared/EnergyIcon'
+import PrintCardsComponent from './components/Shared/PrintCards'
+import SearchDialogComponent from './components/Shared/SearchDialog'
+import SetCardComponent from './components/Shared/SetCard'
 
 Vue.use(Vuetify, {
   theme: {
@@ -44,6 +45,7 @@ Vue.filter('dateTime', DateTimeFilter)
 Vue.filter('seoTitle', SeoTitleFilter)
 Vue.component('v-select', vSelect)
 Vue.component('layout-basic', LayoutBasicComponent)
+Vue.component('layout-build-deck', LayoutBuildDeckComponent)
 Vue.component('app-alert', AlertComponent)
 Vue.component('app-bar-chart', BarChartComponent)
 Vue.component('app-card-info', CardInfoComponent)
