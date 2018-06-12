@@ -1,5 +1,5 @@
 <template>
-  <v-layout v-if="cards">
+  <v-layout row wrap v-if="cards">
     <v-flex xs12>
 
       <v-layout row wrap>
@@ -88,13 +88,16 @@
 </template>
 
 <script>
+  import TcgoService from '@/services/pctg/Service'
+
   export default {
-    props: ['cards'],
+    props: ['params'],
     data: () => ({
       cardIndex: false,
       cardDialog: false,
       cardZoomDialog: false,
-      chartDataReady: false
+      chartDataReady: false,
+      cards: []
     }),
     computed: {
       cardData () {
@@ -109,6 +112,30 @@
       openCardZoomDialog (index) {
         this.cardIndex = index
         this.cardZoomDialog = true
+      },
+      getCards () {
+        TcgoService
+          .getCards({
+            params: this.params
+          })
+          .then(
+            response => {
+              this.cards = response.data.cards
+            }
+          )
+          .catch(
+            error => {
+              console.log(error)
+            }
+          )
+      }
+    },
+    mounted () {
+      this.getCards()
+    },
+    watch: {
+      params: function (newVal, oldVal) {
+        this.getCards()
       }
     }
   }

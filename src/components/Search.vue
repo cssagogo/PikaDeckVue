@@ -20,9 +20,6 @@
             >
               <v-form @submit.prevent="getCards" class="pa-2">
 
-
-
-
                 Energy Types
                 <v-select
                   multiple
