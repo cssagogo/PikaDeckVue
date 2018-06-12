@@ -18,6 +18,9 @@
               </v-layout>
             </v-card-media>
             <v-card-actions>
+              <v-btn small color="primary" @click="addCard(card)">
+                Add
+              </v-btn>
               <v-spacer></v-spacer>
               <v-menu :nudge-width="150" bottom left>
                 <v-btn slot="activator" icon>
@@ -144,6 +147,9 @@
               console.log(error)
             }
           )
+      },
+      addCard (card) {
+        this.$emit('addCard', card)
       }
     },
     mounted () {

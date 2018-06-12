@@ -9,7 +9,7 @@
         app
         clipped-right
       >
-        <v-toolbar-side-icon @click.stop="drawer = !drawer"></v-toolbar-side-icon>
+        <v-toolbar-side-icon @click.stop="deckDrawer = !deckDrawer"></v-toolbar-side-icon>
         <v-text-field
           v-model="filters.name"
           @keyup.enter="onSearchInput"
@@ -20,14 +20,15 @@
           ref="search"
         ></v-text-field>
         <v-spacer></v-spacer>
-        <v-btn flat icon @click.stop="right = !right">
+        <v-btn flat icon @click.stop="filterDrawer = !filterDrawer">
           <v-icon>filter_list</v-icon>
         </v-btn>
       </v-toolbar>
 
+
       <v-navigation-drawer
         fixed
-        v-model="drawer"
+        v-model="deckDrawer"
         app
       >
 
@@ -88,19 +89,25 @@
             </v-flex>
           </v-layout>
 
+          <v-layout row wrap v-for="(card, index) in cards" :key="`card-added-${index}`">
+            <v-flex xs12>{{ card.name }}</v-flex>
+          </v-layout>
+
+
+
         </form>
 
       </v-navigation-drawer>
 
-      <app-card-list :params="filters"></app-card-list>
+      <app-card-list :params="filters" @addCard="addCard"></app-card-list>
 
       <v-navigation-drawer
         right
         temporary
-        v-model="right"
+        v-model="filterDrawer"
         fixed>
         <v-toolbar color="white">
-          <v-btn flat icon @click.stop="right = !right">
+          <v-btn flat icon @click.stop="filterDrawer = !filterDrawer">
             <v-icon>close</v-icon>
           </v-btn>
           <v-toolbar-title>Filter</v-toolbar-title>
@@ -118,14 +125,13 @@
     data () {
       return {
         name: '',
-        drawer: true,
-        drawerRight: true,
-        right: null,
-        left: null,
+        deckDrawer: true,
+        filterDrawer: null,
         title: '',
         imageUrl: '',
         description: '',
-        filters: {}
+        filters: {},
+        cards: []
       }
     },
     computed: {
@@ -142,7 +148,7 @@
         }
       },
       onFilterCards (params) {
-        this.right = false
+        this.filterDrawer = false
         this.filters = {
           ...this.filters,
           ...params
@@ -160,7 +166,10 @@
         }
         this.$store.dispatch('createDeck', deckData)
         this.$router.push('/decks')
-      }
+      },
+      addCard (card) {
+        this.cards.push(card)
+      },
     },
     mounted () {
       this.$nextTick(() => this.$refs.search.focus())
