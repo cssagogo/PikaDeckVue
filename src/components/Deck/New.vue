@@ -168,8 +168,11 @@
         this.$router.push('/decks')
       },
       addCard (card) {
+        // TODO: If not energy and if more than 4 of card name exist, alert user.
+        // TODO: If 60 cards, alert user on add.
+        // TODO: If card not standard, alert user on first non standard add.
         this.cards.push(card)
-      },
+      }
     },
     mounted () {
       this.$nextTick(() => this.$refs.search.focus())

@@ -1,37 +1,62 @@
 <template>
   <v-form @submit.prevent="pushFilters" class="pa-2">
-    Energy Types
-    <v-select
-      multiple
-      class="white"
-      v-model="types"
-      :options="$store.state.loadedTypes"
-    ></v-select>
 
-    Card Types
-    <v-select
-      multiple
-      class="white"
-      v-model="supertype"
-      :options="$store.state.loadedSupertypes"
-    ></v-select>
+    <v-layout row wrap class="my-2">
+      <v-flex xs12>
+        <label class="subheading">Energy Types</label>
+        <v-select
+          multiple
+          class="white"
+          v-model="types"
+          :options="$store.state.loadedTypes"
+        ></v-select>
+      </v-flex>
+    </v-layout>
 
-    Attributes
-    <v-select
-      multiple
-      class="white"
-      v-model="subtype"
-      :options="$store.state.loadedSubtypes"
-    ></v-select>
 
-    Expansions
-    <v-select
-      multiple
-      class="white"
-      label="name"
-      v-model="set"
-      :options="$store.state.loadedSets"
-    ></v-select>
+    <v-layout row wrap class="my-2">
+      <v-flex xs12>
+        <label class="subheading">Card Types</label>
+        <v-select
+          multiple
+          class="white"
+          v-model="supertype"
+          :options="$store.state.loadedSupertypes"
+        ></v-select>
+      </v-flex>
+    </v-layout>
+
+
+    <v-layout row wrap class="my-2">
+      <v-flex xs12>
+        <label class="subheading">Attributes</label>
+        <v-select
+          multiple
+          class="white"
+          v-model="subtype"
+          :options="$store.state.loadedSubtypes"
+        ></v-select>
+      </v-flex>
+    </v-layout>
+
+
+    <v-layout row wrap class="my-2">
+      <v-flex xs12>
+        <label class="subheading">Expansions</label>
+        <v-select
+          multiple
+          class="white"
+          label="name"
+          v-model="set"
+          :options="$store.state.loadedSets"
+        ></v-select>
+        <a href="#" @click.stop.prevent="addStandardSets">
+          Add Standard Expansions
+        </a>
+      </v-flex>
+    </v-layout>
+
+
 
     <v-layout row>
       <v-flex xs12>
@@ -72,6 +97,10 @@
       },
       pushFilters () {
         this.$emit('apply', this.getParams())
+      },
+      addStandardSets () {
+        let sets = this.$store.getters.loadedSets.filter(item => item.standardLegal)
+        this.set = sets
       }
     }
   }
