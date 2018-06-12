@@ -102,9 +102,24 @@
     computed: {
       cardData () {
         return this.cards[this.cardIndex]
+      },
+      defaultParams () {
+        let sets = this.$store.getters.loadedSets.slice(0, 10)
+        return {
+          subtype: this.toParamString(['GX']),
+          set: this.toParamString(this.getSetNames(sets))
+        }
       }
     },
     methods: {
+      getSetNames (sets) {
+        return sets.map(obj => {
+          return obj.name
+        })
+      },
+      toParamString (paramArray) {
+        return (paramArray) ? paramArray.join('|') : ''
+      },
       openCardDialog (index) {
         this.cardIndex = index
         this.cardDialog = true
@@ -114,9 +129,10 @@
         this.cardZoomDialog = true
       },
       getCards () {
+        let isParams = Object.values(this.params).filter(item => item).length !== 0
         TcgoService
           .getCards({
-            params: this.params
+            params: (isParams) ? this.params : this.defaultParams
           })
           .then(
             response => {

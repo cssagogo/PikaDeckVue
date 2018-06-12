@@ -125,9 +125,7 @@
         title: '',
         imageUrl: '',
         description: '',
-        filters: {
-          name: 'pikachu'
-        }
+        filters: {}
       }
     },
     computed: {
@@ -144,7 +142,7 @@
         }
       },
       onFilterCards (params) {
-        this.right = !this.right
+        this.right = false
         this.filters = {
           ...this.filters,
           ...params

@@ -47,25 +47,27 @@
   export default {
     data () {
       return {
-        types: '',
-        subtype: '',
-        supertype: '',
-        set: ''
+        types: [],
+        subtype: [],
+        supertype: [],
+        set: []
       }
     },
     methods: {
       getSetNames (sets) {
-        return sets
+        return sets.map(obj => {
+          return obj.name
+        })
       },
       toParamString (paramArray) {
-        return (paramArray) ? paramArray.join('|') : ''
+        return (paramArray) ? paramArray.join('|') : null
       },
       getParams () {
         return {
           types: this.toParamString(this.types),
           subtype: this.toParamString(this.subtype),
           supertype: this.toParamString(this.supertype),
-          set: this.getSetNames(this.set)
+          set: this.toParamString(this.getSetNames(this.set))
         }
       },
       pushFilters () {
