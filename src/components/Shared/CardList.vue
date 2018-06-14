@@ -23,7 +23,7 @@
               </v-btn>
               <v-spacer></v-spacer>
               <v-menu :nudge-width="150" bottom left>
-                <v-btn slot="activator" icon>
+                <v-btn small slot="activator" icon>
                   <v-icon>more_vert</v-icon>
                 </v-btn>
                 <v-list>

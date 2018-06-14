@@ -158,8 +158,6 @@
       tournamentType () {
         return (this.set.standardLegal) ? 'Standard' : (this.set.expandedLegal) ? 'Expanded' : 'Unlimited'
       }
-    },
-    methods: {
     }
   }
 </script>

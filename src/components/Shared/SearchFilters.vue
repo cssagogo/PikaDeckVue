@@ -50,7 +50,7 @@
           v-model="set"
           :options="$store.state.loadedSets"
         ></v-select>
-        <a href="#" @click.stop.prevent="addStandardSets">
+        <a href="#" @click.stop.prevent="addStandardSets" class="accent--text">
           Add Standard Expansions
         </a>
       </v-flex>

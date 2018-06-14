@@ -58,17 +58,43 @@
           <v-flex xs12>
             <v-btn class="primary ma-0"
                    :disabled="!formIsValid"
-                   type="submit">Create Deck</v-btn>
+                   type="submit">Save Deck</v-btn>
           </v-flex>
         </v-layout>
 
-        <div class="title mt-4">Cards in Deck:</div>
+        <div class="title mt-4 mb-2">
+          <span>Cards in Deck</span>
+          <small v-if="cards.length > 0" class="grey--text">
+            ({{ cards.length }} of 60)
+          </small>
+        </div>
         <div v-if="cards.length > 0">
           <v-layout row wrap v-for="(card, index) in cards" :key="`card-added-${index}`">
-            <v-flex xs12>{{ card.name }}</v-flex>
+            <v-flex xs2>
+              <img :src="card.imageUrl" class="pr-2" style="width: 100%; height: auto">
+            </v-flex>
+            <v-flex xs7>
+              <div class="body-2">
+                {{ card.name }}
+                <span v-if="card.supertype === 'Pokémon'">
+                  {{ ptcgoCode(card.setCode) }} {{ card.number }}
+                </span>
+              </div>
+              <div :class="tournamentTypeClass(card.setCode) + ' caption'">
+                {{ tournamentType(card.setCode) }} Expansion
+              </div>
+            </v-flex>
+            <v-flex xs3 class="text-xs-right">
+              <v-btn flat icon small @click="removeCard(index)">
+                <v-icon>close</v-icon>
+              </v-btn>
+            </v-flex>
+            <v-flex xs12 class="pb-2">
+              <v-divider></v-divider>
+            </v-flex>
           </v-layout>
         </div>
-        <div v-else>No cards have been added.</div>
+        <div v-else class="grey--text">No cards have been added</div>
 
 
 
@@ -105,6 +131,12 @@
         label="Search"
         ref="search">
       </v-text-field>
+      <v-tooltip bottom>
+        <v-btn slot="activator" dark flat icon>
+          <v-icon>help_outline</v-icon>
+        </v-btn>
+        <span>Try using double quotes to find exact matches. For example "N"</span>
+      </v-tooltip>
       <v-spacer></v-spacer>
       <v-btn flat icon
         @click.stop="filterDrawer = !filterDrawer">
@@ -196,7 +228,21 @@
         // TODO: If not energy and if more than 4 of card name exist, alert user.
         // TODO: If 60 cards, alert user on add.
         // TODO: If card not standard, alert user on first non standard add.
-        this.cards.push(card)
+        this.cards.unshift(card)
+      },
+      removeCard (index) {
+        this.cards.splice(index, 1)
+      },
+      ptcgoCode (setCode) {
+        return this.$store.getters.loadedSet(setCode).ptcgoCode
+      },
+      tournamentType (setCode) {
+        let set = this.$store.getters.loadedSet(setCode)
+        return (set.standardLegal) ? 'Standard' : (set.expandedLegal) ? 'Expanded' : 'Unlimited'
+      },
+      tournamentTypeClass (setCode) {
+        let set = this.$store.getters.loadedSet(setCode)
+        return (set.standardLegal) ? 'green--text' : (set.expandedLegal) ? 'orange--text' : 'red--text'
       }
     }
   }
